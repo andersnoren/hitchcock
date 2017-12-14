@@ -1,0 +1,237 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hitchcock v1.01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-10-04 07:46:25+0000\n"
+"Last-Translator: anders <anders@andersnoren.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:11
+#@ hitchcock
+msgid "Error 404"
+msgstr ""
+
+#: 404.php:19
+#@ hitchcock
+msgid "It seems like you have tried to open a page that doesn't exist. It could have been deleted, moved, or it never existed at all. You are welcome to search for what you are looking for with the form below."
+msgstr ""
+
+#: archive.php:8
+#@ hitchcock
+msgid "Date"
+msgstr ""
+
+#: archive.php:11
+#@ hitchcock
+msgid "Month"
+msgstr ""
+
+#: archive.php:14
+#@ hitchcock
+msgid "Year"
+msgstr ""
+
+#: archive.php:17
+#@ hitchcock
+msgid "Category"
+msgstr ""
+
+#: archive.php:20
+#@ hitchcock
+msgid "Tag"
+msgstr ""
+
+#: archive.php:23
+#@ hitchcock
+msgid "Author"
+msgstr ""
+
+#: archive.php:27
+#@ hitchcock
+msgid "Archive"
+msgstr ""
+
+#. gettext fix: identical singular and plural forms found, that may be ambiguous! Please check the code!
+#: comments.php:18
+#: comments.php:90
+#@ hitchcock
+msgid "Comment"
+msgid_plural "Comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:37
+#@ hitchcock
+msgid "Pingback"
+msgid_plural "Pingbacks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:55
+#@ hitchcock
+msgid "Older"
+msgstr ""
+
+#: comments.php:61
+#@ hitchcock
+msgid "Newer"
+msgstr ""
+
+#: comments.php:80
+#@ hitchcock
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php:98
+#@ hitchcock
+msgid "Name"
+msgstr ""
+
+#: comments.php:104
+#@ hitchcock
+msgid "Email"
+msgstr ""
+
+#: comments.php:110
+#@ hitchcock
+msgid "Website"
+msgstr ""
+
+#: content.php:9
+#@ hitchcock
+msgid "Sticky"
+msgstr ""
+
+#: footer.php:4
+#@ hitchcock
+msgid "Theme by"
+msgstr ""
+
+#: functions.php:46
+#@ hitchcock
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:47
+#@ hitchcock
+msgid "Social Menu"
+msgstr ""
+
+#: functions.php:303
+#@ hitchcock
+msgid "Pingback:"
+msgstr ""
+
+#: functions.php:303
+#: functions.php:346
+#@ hitchcock
+msgid "Edit"
+msgstr ""
+
+#: functions.php:321
+#@ hitchcock
+msgid "Post Author"
+msgstr ""
+
+#: functions.php:337
+#@ hitchcock
+msgid "Reply"
+msgstr ""
+
+#: functions.php:350
+#@ hitchcock
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: functions.php:372
+#: functions.php:408
+#@ hitchcock
+msgid "Logo"
+msgstr ""
+
+#: functions.php:374
+#@ hitchcock
+msgid "Upload a logo to replace the default site title in the sidebar/header"
+msgstr ""
+
+#: functions.php:400
+#@ hitchcock
+msgid "Accent Color"
+msgstr ""
+
+#: header.php:43
+#: searchform.php:2
+#@ hitchcock
+msgid "Search Form"
+msgstr ""
+
+#: index.php:17
+#, php-format
+#@ hitchcock
+msgid "Page %s of %s"
+msgstr ""
+
+#: page.php:35
+#: single.php:53
+#@ fukasawa
+#@ hitchcock
+msgid "Pages:"
+msgstr ""
+
+#: page.php:41
+#@ hitchcock
+msgid "Edit Page"
+msgstr ""
+
+#: page.php:53
+#: single.php:126
+#@ hitchcock
+msgid "We couldn't find any posts that matched your query. Please try again."
+msgstr ""
+
+#: search.php:9
+#: search.php:33
+#@ hitchcock
+msgid "Search Results"
+msgstr ""
+
+#: search.php:46
+#@ hitchcock
+msgid "No results. Try again, would you kindly?"
+msgstr ""
+
+#: single.php:69
+#@ hitchcock
+msgid "In"
+msgstr ""
+
+#: single.php:93
+#@ hitchcock
+msgid "Next"
+msgstr ""
+
+#: single.php:93
+#: single.php:104
+#@ hitchcock
+msgid "Post"
+msgstr ""
+
+#: single.php:104
+#@ hitchcock
+msgid "Previous"
+msgstr ""
+
