@@ -69,6 +69,10 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.11 (2018-01-31)
+-------------------------
+- Fixed accent color setting
+
 Version 1.10 (2017-12-07)
 -------------------------
 - Fixed ordering issue in the Customizer class causing the accent color control to disappear in a puff of smoke

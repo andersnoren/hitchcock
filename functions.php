@@ -446,7 +446,7 @@ if ( ! function_exists( 'hitchcock_comment' ) ) {
 
 class hitchcock_customize {
 
-	public static function hitchcock_register ( $wp_customize ) {
+	public static function hitchcock_register( $wp_customize ) {
 
 		// Hitchcock theme options section
 		$wp_customize->add_section( 'hitchcock_options', array(
@@ -499,7 +499,7 @@ class hitchcock_customize {
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'hitchcock_accent_color', array(
 			'label' 	=> __( 'Accent Color', 'hitchcock' ), 
-			'section' 	=> 'color',
+			'section' 	=> 'hitchcock_options',
 			'settings' 	=> 'hitchcock_accent_color', 
 		) ) );
 
@@ -525,36 +525,36 @@ class hitchcock_customize {
 
 		<style type="text/css">
 		
-			<?php self::hitchcock_generate_css( 'body a', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( 'body a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.blog-title a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.social-menu a:hover', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post:hover .archive-post-title', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a:hover', 'border-bottom-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content p.pull', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="submit"]', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="button"]', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="reset"]', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input:focus', 'border-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content textarea:focus', 'border-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.button', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.page-links a:hover', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comments .pingbacks li a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-header h4 a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-form input:focus', 'border-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-form textarea:focus', 'border-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.form-submit #submit', 'background-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-title .url:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-actions a', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-actions a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.archive-nav a:hover', 'color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '#infinite-handle:hover', 'background', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.credits p:first-child a:hover', 'color', 'accent_color' ); ?>
+			<?php self::hitchcock_generate_css( 'body a', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( 'body a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.blog-title a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.social-menu a:hover', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post:hover .archive-post-title', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content a', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content a:hover', 'border-bottom-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content p.pull', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content input[type="submit"]', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content input[type="button"]', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content input[type="reset"]', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content input:focus', 'border-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.post-content textarea:focus', 'border-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.button', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.page-links a:hover', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comments .pingbacks li a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-header h4 a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-form input:focus', 'border-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-form textarea:focus', 'border-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.form-submit #submit', 'background-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-title .url:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-actions a', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.comment-actions a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.archive-nav a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '#infinite-handle:hover', 'background', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.credits p:first-child a:hover', 'color', 'hitchcock_accent_color' ); ?>
 
-			<?php self::hitchcock_generate_css( '.nav-toggle.active .bar', 'background-color', 'accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.mobile-menu a:hover', 'color', 'accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.nav-toggle.active .bar', 'background-color', 'hitchcock_accent_color' ); ?>
+			<?php self::hitchcock_generate_css( '.mobile-menu a:hover', 'color', 'hitchcock_accent_color' ); ?>
 
 		</style> 
 
