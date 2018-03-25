@@ -69,6 +69,11 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.12 (2018-03-25)
+-------------------------
+- Added logo support back in, together with a retina logo setting
+- Added current menu item styling
+
 Version 1.11 (2018-01-31)
 -------------------------
 - Fixed accent color setting
