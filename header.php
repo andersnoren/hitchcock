@@ -70,7 +70,6 @@
 				<ul class="mobile-menu">
 																			
 					<?php 
-					
 					if ( has_nav_menu( 'primary' ) ) {
 						wp_nav_menu( $nav_args );
 					} else {
@@ -92,30 +91,29 @@
 	
 		<div class="header section-inner">
 		
-			<?php if ( get_theme_mod( 'hitchcock_logo' ) ) : ?>
+			<?php 
 			
-		        <a class="blog-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>' title='<?php echo esc_attr( get_bloginfo( 'title' ) ); ?> &mdash; <?php echo esc_attr( get_bloginfo( 'description' ) ); ?>' rel='home'>
-		        	<img src='<?php echo esc_url( get_theme_mod( 'hitchcock_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'title' ) ); ?>'>
-		        </a>
-		
-			<?php else : 
+			if ( get_theme_mod( 'custom_logo' ) ) :
+
+				hitchcock_custom_logo();
 				
-				$title_type = is_singular() ? '2' : '1';
-				?>
+			else : 
+				
+				$title_type = is_singular() ? '2' : '1'; ?>
 		
 				<h<?php echo $title_type; ?> class="blog-title">
 					<a href="<?php echo esc_url( home_url() ); ?>" title="<?php echo esc_attr( get_bloginfo( 'title' ) ); ?> &mdash; <?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
 				</h<?php echo $title_type; ?>>
 				
-			<?php endif; ?>
+			<?php endif;
 			
-			<?php if ( get_bloginfo( 'description' ) ) : ?>
+			if ( get_bloginfo( 'description' ) ) : ?>
 			
 				<p class="blog-description"><?php echo bloginfo( 'description' ); ?></p>
 			
-			<?php endif; ?>
+			<?php endif;
 			
-			<?php if ( has_nav_menu( 'social' ) ) : ?>
+			if ( has_nav_menu( 'social' ) ) : ?>
 			
 				<ul class="social-menu">
 							

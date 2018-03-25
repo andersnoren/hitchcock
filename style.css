@@ -9,7 +9,7 @@
 	Author URI: http://www.andersnoren.se
     Theme URI: http://www.andersnoren.se/teman/hitchcock-wordpress-theme/
 	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, a social icon menu, Jetpack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styling and much more. Demo: http://www.andersnoren.se/themes/hitchcock/
-    Tags: blog, three-columns, custom-colors, custom-header, custom-menu, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography
+    Tags: blog, three-columns, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -448,23 +448,27 @@ input[type="button"],
 
 .blog-title a { color: #fff; }
 
-.blog-logo,
-.blog-logo img { display: block; }
+.custom-logo-link,
+.custom-logo-link img { 
+	display: block; 
+}
 
-.blog-logo img { margin: 0 auto; }
+.custom-logo-link img { 
+	margin: 0 auto; 
+}
 
 .blog-logo:hover {
+		-moz-opacity: 0.6;
+		-webkit-opacity: 0.6;
 	opacity: 0.6;
-	-moz-opacity: 0.6;
-	-webkit-opacity: 0.6;
 }
 
 .blog-description {
-	margin-top: 25px;
+	color: #fff;
 	font-family: 'Droid Serif', Georgia, serif; 
 	line-height: 145%;
+	margin-top: 25px;
 	text-align: center;
-	color: #fff;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 

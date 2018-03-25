@@ -24,6 +24,9 @@ if ( ! function_exists( 'hitchcock_setup' ) ) {
 		
 		// Title tag
 		add_theme_support( 'title-tag' );
+
+		// Custom logo
+		add_theme_support( 'custom-logo' );
 		
 		// Custom header
 		$args = array(
@@ -178,6 +181,45 @@ if ( ! function_exists( 'hitchcock_archive_navigation' ) ) {
 			</div><!-- .archive-nav-->
 							
 		<?php endif;
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   CUSTOM LOGO OUTPUT
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'hitchcock_custom_logo' ) ) {
+
+	function hitchcock_custom_logo() {
+
+		// Get the logo
+		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+		
+		if ( $logo ) {
+
+			// For clarity
+			$logo_url = esc_url( $logo[0] );
+			$logo_width = esc_attr( $logo[1] );
+			$logo_height = esc_attr( $logo[2] );
+
+			// If the retina logo setting is active, reduce the width/height by half
+			if ( get_theme_mod( 'hitchcock_retina_logo' ) ) {
+				$logo_width = floor( $logo_width / 2 );
+				$logo_height = floor( $logo_height / 2 );
+			}
+
+			?>
+			
+			<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
+				<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" />
+			</a>
+
+			<?php
+		}
+
 	}
 
 }
@@ -457,25 +499,36 @@ class hitchcock_customize {
 		) );
 
 
-		// Section and setting for modifying the theme logo
-		$wp_customize->add_section( 'hitchcock_logo_section', array(
-			'title'       => __( 'Logo', 'hitchcock' ),
-			'priority'    => 40,
-			'description' => __( 'Upload a logo to replace the default site title in the sidebar/header', 'hitchcock' ),
+		/* 2X Header Logo ----------------------------- */
+
+
+		$wp_customize->add_setting( 'hitchcock_retina_logo', array(
+			'capability' 		=> 'edit_theme_options',
+			'sanitize_callback' => 'hitchcock_sanitize_checkbox',
+			'transport'			=> 'postMessage'
 		) );
 
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'hitchcock_logo', array(
-			'label'    => __( 'Logo', 'hitchcock' ),
-			'section'  => 'hitchcock_logo_section',
-			'settings' => 'hitchcock_logo',
-		) ) );
+		$wp_customize->add_control( 'hitchcock_retina_logo', array(
+			'type' 			=> 'checkbox',
+			'section' 		=> 'title_tagline',
+			'priority'		=> 9,
+			'label' 		=> __( 'Retina logo', 'hitchcock' ),
+			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'hitchcock' ),
+		) );
 
-		$wp_customize->add_setting( 'hitchcock_logo', array( 
-			'sanitize_callback' => 'esc_url_raw' 
+		// Update logo retina setting with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'hitchcock_retina_logo', array(
+			'selector' 			=> '.header .custom-logo-link',
+			'settings' 			=> array( 'hitchcock_retina_logo' ),
+			'render_callback' 	=> function(){
+				hitchcock_custom_logo();
+			},
 		) );
 
 
-		// Always show titles setting and control
+		/* Always show titles setting ----------------------------- */
+
+
 		$wp_customize->add_setting( 'hitchcock_show_titles', array(
 			'capability' 		=> 'edit_theme_options',
 			'sanitize_callback' => 'hitchcock_sanitize_checkbox',
@@ -489,7 +542,10 @@ class hitchcock_customize {
 			'description' 	=> __( 'Check to always show the titles in the post previews.', 'hitchcock' ),
 		) );
 
-		// Custom accent color setting and control
+
+		/* Custom accent color ----------------------------- */
+
+
 		$wp_customize->add_setting( 'hitchcock_accent_color', array(
 			'default' 			=> '#3bc492', 
 			'type' 				=> 'theme_mod', 
@@ -502,7 +558,6 @@ class hitchcock_customize {
 			'section' 	=> 'hitchcock_options',
 			'settings' 	=> 'hitchcock_accent_color', 
 		) ) );
-
 
 		// Make built-in controls use live-JS preview
 		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
