@@ -238,7 +238,10 @@ input[type="button"],
 	z-index: 10000;
 }
 
-.main-menu li:hover > a { color: #fff; }
+.main-menu li:hover > a,
+.main-menu li.current-menu-item > a { 
+	color: #fff; 
+}
 
 .main-menu > li.menu-item-has-children > a,
 .main-menu > li.page_item_has_children > a { padding-right: 15px; }
