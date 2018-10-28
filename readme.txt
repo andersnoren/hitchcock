@@ -69,6 +69,30 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.15 (2018-10-28)
+-------------------------
+- Fixed blog description font
+
+Version 1.14 (2018-10-28)
+-------------------------
+- Updated with Gutenberg support
+	- Gutenberg editor styles
+	- Styling of Gutenberg blocks
+	- Custom Hitchcock Gutenberg palette
+	- Custom Hitchcock Gutenberg typography styles
+- Added option to disable Google Fonts with a translateable string
+- Updated theme description
+- Improved compatibility with < PHP 5.5
+- Removed the languages sub folder, since that is handled by WordPress.org
+- Removed old vendor prefixed CSS
+- Updated the Google Fonts enqueue to make use of new weights added to Montserrat since Hitchcock was created
+- Updated the styling to make use of the new weights
+- Disabled webkit font smoothing to improve readability
+
+Version 1.13 (2018-05-24)
+-------------------------
+- Fixed output of cookie checkbox in comments
+
 Version 1.12 (2018-03-25)
 -------------------------
 - Added logo support back in, together with a retina logo setting

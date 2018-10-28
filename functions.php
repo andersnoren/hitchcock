@@ -102,10 +102,28 @@ if ( ! function_exists( 'hitchcock_load_style' ) ) {
 
 	function hitchcock_load_style() {
 		if ( ! is_admin() ) {
-			wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,700|Droid+Serif:400,400italic,700,700italic' );
+
+			$dependencies = array();
+
+			/**
+			 * Translators: If there are characters in your language that are not
+			 * supported by the theme fonts, translate this to 'off'. Do not translate
+			 * into your own language.
+			 */
+			$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
+
+			if ( 'off' !== $google_fonts ) {
+
+				// Register Google Fonts
+				wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
+				$dependencies[] = 'hitchcock_google_fonts';
+
+			}
+
 			wp_register_style( 'hitchcock_fontawesome', get_stylesheet_directory_uri() . '/fa/css/font-awesome.css' );
+			$dependencies[] = 'hitchcock_fontawesome';
 			
-			wp_enqueue_style( 'hitchcock_style', get_stylesheet_uri(), array( 'hitchcock_google_fonts', 'hitchcock_fontawesome' ) );
+			wp_enqueue_style( 'hitchcock_style', get_stylesheet_uri(), $dependencies );
 		}
 	}
 	add_action( 'wp_print_styles', 'hitchcock_load_style' );
@@ -121,9 +139,25 @@ if ( ! function_exists( 'hitchcock_load_style' ) ) {
 if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) {
 
 	function hitchcock_add_editor_styles() {
+
 		add_editor_style( 'hitchcock-editor-styles.css' );
-		$font_url = '//fonts.googleapis.com/css?family=Montserrat:400,700|Droid+Serif:400,400italic,700,700italic';
-		add_editor_style( str_replace( ', ', '%2C', $font_url ) );
+
+		$dependencies = array();
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
+
+		if ( 'off' !== $google_fonts ) {
+
+			$font_url = '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic';
+			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
+
+		}
+		
 	}
 	add_action( 'init', 'hitchcock_add_editor_styles' );
 
@@ -411,7 +445,6 @@ if ( ! function_exists( 'hitchcock_related_posts' ) ) {
 if ( ! function_exists( 'hitchcock_comment' ) ) {
 
 	function hitchcock_comment( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
 			case 'trackback' :
@@ -435,7 +468,7 @@ if ( ! function_exists( 'hitchcock_comment' ) ) {
 					<?php echo get_comment_author_link(); ?>
 					<span><a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ) ?>" title="<?php echo get_comment_date() . ' at ' . get_comment_time(); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></a>
 					<?php
-					if ( $post = get_post($post->ID) ) {
+					if ( $post == get_post( $post->ID ) ) {
 						if ( $comment->user_id === $post->post_author )
 						echo ' &mdash; ' . __( 'Post Author', 'hitchcock' );
 					}
@@ -516,15 +549,6 @@ class hitchcock_customize {
 			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'hitchcock' ),
 		) );
 
-		// Update logo retina setting with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'hitchcock_retina_logo', array(
-			'selector' 			=> '.header .custom-logo-link',
-			'settings' 			=> array( 'hitchcock_retina_logo' ),
-			'render_callback' 	=> function(){
-				hitchcock_custom_logo();
-			},
-		) );
-
 
 		/* Always show titles setting ----------------------------- */
 
@@ -574,48 +598,52 @@ class hitchcock_customize {
 	}
 
 	public static function hitchcock_header_output() {
-		?>
 
-		<!-- Customizer CSS --> 
+		echo '<!-- Customizer CSS -->';
 
-		<style type="text/css">
+		echo '<style type="text/css">';
 		
-			<?php self::hitchcock_generate_css( 'body a', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( 'body a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.blog-title a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.social-menu a:hover', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post:hover .archive-post-title', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content a:hover', 'border-bottom-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content p.pull', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="submit"]', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="button"]', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input[type="reset"]', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content input:focus', 'border-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.post-content textarea:focus', 'border-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.button', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.page-links a:hover', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comments .pingbacks li a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-header h4 a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-form input:focus', 'border-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-form textarea:focus', 'border-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.form-submit #submit', 'background-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-title .url:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-actions a', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.comment-actions a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.archive-nav a:hover', 'color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '#infinite-handle:hover', 'background', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.credits p:first-child a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			self::hitchcock_generate_css( 'body a', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( 'body a:hover', 'color', 'hitchcock_accent_color' );
 
-			<?php self::hitchcock_generate_css( '.nav-toggle.active .bar', 'background-color', 'hitchcock_accent_color' ); ?>
-			<?php self::hitchcock_generate_css( '.mobile-menu a:hover', 'color', 'hitchcock_accent_color' ); ?>
+			self::hitchcock_generate_css( '.blog-title a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.social-menu a:hover', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post:hover .archive-post-title', 'color', 'hitchcock_accent_color' );
 
-		</style> 
+			self::hitchcock_generate_css( '.post-content a', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content a:hover', 'border-bottom-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content p.pull', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content input[type="submit"]', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content input[type="button"]', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content input[type="reset"]', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content input:focus', 'border-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.post-content textarea:focus', 'border-color', 'hitchcock_accent_color' );
 
-		<!-- /Customizer CSS -->
+			self::hitchcock_generate_css( '.post-content .has-accent-color', 'color', 'accent_color' );
+			self::hitchcock_generate_css( '.post-content .has-accent-background-color', 'background-color', 'accent_color' );
 
-		<?php
+			self::hitchcock_generate_css( '.button', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.page-links a:hover', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comments .pingbacks li a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-header h4 a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-form input:focus', 'border-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-form textarea:focus', 'border-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.form-submit #submit', 'background-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-title .url:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-actions a', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.comment-actions a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.archive-nav a:hover', 'color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '#infinite-handle:hover', 'background', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.credits p:first-child a:hover', 'color', 'hitchcock_accent_color' );
+
+			self::hitchcock_generate_css( '.nav-toggle.active .bar', 'background-color', 'hitchcock_accent_color' );
+			self::hitchcock_generate_css( '.mobile-menu a:hover', 'color', 'hitchcock_accent_color' );
+
+		echo '</style>';
+
+		echo '<!-- /Customizer CSS -->';
+
 	}
 
 	public static function hitchcock_live_preview() {
@@ -646,5 +674,125 @@ add_action( 'wp_head', array( 'hitchcock_customize', 'hitchcock_header_output' )
 
 // Enqueue live preview javascript in Theme Customizer admin screen
 add_action( 'customize_preview_init', array( 'hitchcock_customize', 'hitchcock_live_preview' ) );
+
+
+/* ---------------------------------------------------------------------------------------------
+   SPECIFY GUTENBERG SUPPORT
+------------------------------------------------------------------------------------------------ */
+
+
+if ( ! function_exists( 'hitchcock_add_gutenberg_features' ) ) :
+
+	function hitchcock_add_gutenberg_features() {
+
+		/* Gutenberg Features --------------------------------------- */
+
+		add_theme_support( 'align-wide' );
+
+		/* Gutenberg Palette --------------------------------------- */
+
+		$accent_color = get_theme_mod( 'accent_color' ) ? get_theme_mod( 'accent_color' ) : '#3bc492';
+
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name' 	=> _x( 'Accent', 'Name of the accent color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'accent',
+				'color' => $accent_color,
+			),
+			array(
+				'name' 	=> _x( 'Black', 'Name of the black color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'black',
+				'color' => '#1d1d1d',
+			),
+			array(
+				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'dark-gray',
+				'color' => '#555',
+			),
+			array(
+				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'medium-gray',
+				'color' => '#777',
+			),
+			array(
+				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'light-gray',
+				'color' => '#999',
+			),
+			array(
+				'name' 	=> _x( 'White', 'Name of the white color in the Gutenberg palette', 'hitchcock' ),
+				'slug' 	=> 'white',
+				'color' => '#fff',
+			),
+		) );
+
+		/* Gutenberg Font Sizes --------------------------------------- */
+
+		add_theme_support( 'editor-font-sizes', array(
+			array(
+				'name' 		=> _x( 'Small', 'Name of the small font size in Gutenberg', 'hitchcock' ),
+				'shortName' => _x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'hitchcock' ),
+				'size' 		=> 14,
+				'slug' 		=> 'small',
+			),
+			array(
+				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'hitchcock' ),
+				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'hitchcock' ),
+				'size' 		=> 16,
+				'slug' 		=> 'regular',
+			),
+			array(
+				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'hitchcock' ),
+				'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'hitchcock' ),
+				'size' 		=> 21,
+				'slug' 		=> 'large',
+			),
+			array(
+				'name' 		=> _x( 'Larger', 'Name of the larger font size in Gutenberg', 'hitchcock' ),
+				'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'hitchcock' ),
+				'size' 		=> 26,
+				'slug' 		=> 'larger',
+			),
+		) );
+
+	}
+	add_action( 'after_setup_theme', 'hitchcock_add_gutenberg_features' );
+
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   GUTENBERG EDITOR STYLES
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
+
+	function hitchcock_block_editor_styles() {
+
+		$dependencies = array();
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
+
+		if ( 'off' !== $google_fonts ) {
+
+			// Register Google Fonts
+			wp_register_style( 'hitchcock-block-editor-styles-font', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,50,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
+			$dependencies[] = 'hitchcock-block-editor-styles-font';
+
+		}
+
+		// Enqueue the editor styles
+		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/hitchcock-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+
+	}
+	add_action( 'enqueue_block_editor_assets', 'hitchcock_block_editor_styles', 1 );
+
+endif;
 
 ?>

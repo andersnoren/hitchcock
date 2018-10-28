@@ -14,8 +14,8 @@ body#tinymce.wp-editor {
 }
 
 body#tinymce.wp-editor * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 }
@@ -41,15 +41,16 @@ body#tinymce.wp-editor *:last-child { margin-bottom: 0; }
 body#tinymce.wp-editor h1, body#tinymce.wp-editor h2, body#tinymce.wp-editor h3, body#tinymce.wp-editor h4, body#tinymce.wp-editor h5, body#tinymce.wp-editor h6 { 
 	margin: 50px 0 25px; 
 	font-family: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+	font-weight: 700;
 	text-transform: uppercase;
 }
 
-body#tinymce.wp-editor h1 { font-size: 2.25em; font-weight: 700; }
-body#tinymce.wp-editor h2 { font-size: 1.875em; font-weight: 700; }
-body#tinymce.wp-editor h3 { font-size: 1.5em; font-weight: 700; }
-body#tinymce.wp-editor h4 { font-size: 1.25em; }
-body#tinymce.wp-editor h5 { font-size: 1em; }
-body#tinymce.wp-editor h6 { font-size: 0.8em; }
+body#tinymce.wp-editor h1 { font-size: 2.25em; }
+body#tinymce.wp-editor h2 { font-size: 1.875em; }
+body#tinymce.wp-editor h3 { font-size: 1.5em; font-weight: 600; }
+body#tinymce.wp-editor h4 { font-size: 1.25em; font-weight: 600; }
+body#tinymce.wp-editor h5 { font-size: 1em; font-weight: 500; }
+body#tinymce.wp-editor h6 { font-size: 0.8em; font-weight: 500; }
 
 body#tinymce.wp-editor h1+h1, body#tinymce.wp-editor h1+h2, body#tinymce.wp-editor h1+h3, body#tinymce.wp-editor h1+h4, body#tinymce.wp-editor h1+h5, body#tinymce.wp-editor h1+h6,
 body#tinymce.wp-editor h2+h1, body#tinymce.wp-editor h2+h2, body#tinymce.wp-editor h2+h3, body#tinymce.wp-editor h2+h4, body#tinymce.wp-editor h2+h5, body#tinymce.wp-editor h2+h6,
@@ -140,8 +141,6 @@ body#tinymce.wp-editor kbd,
 body#tinymce.wp-editor code {
 	padding: 5px;
 	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
 }
 
 body#tinymce.wp-editor dl { line-height: 160%; }
