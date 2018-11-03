@@ -1534,7 +1534,7 @@ input[type="submit"]:active {
 	margin-left: 0;
 }
 
-.post-content ul.wp-block-gallery > li:first-child {
+.post-content ul.wp-block-gallery > li: child {
 	margin-top: 0;
 }
 
