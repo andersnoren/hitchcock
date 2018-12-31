@@ -43,10 +43,7 @@
 					?>
 					
 					<li class="header-search">
-						<form method="get" class="search-form" id="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<input type="search" class="search-field" name="s" placeholder="<?php _e( 'Search Form', 'hitchcock' ); ?>" /> 
-							<a class="search-button" onclick="document.getElementById( 'search-form' ).submit(); return false;"><div class="fa fw fa-search"></div></a>
-						</form>
+						<?php get_search_form(); ?>
 					</li>
 					
 				</ul>
@@ -55,7 +52,7 @@
 				
 			</div><!-- .section-inner -->
 			
-			<div class="nav-toggle">
+			<button type="button" class="nav-toggle">
 					
 				<div class="bars">
 					<div class="bar"></div>
@@ -63,7 +60,7 @@
 					<div class="bar"></div>
 				</div>
 				
-			</div><!-- .nav-toggle -->
+			</button><!-- .nav-toggle -->
 			
 			<div class="mobile-navigation">
 			

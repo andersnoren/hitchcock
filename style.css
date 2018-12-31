@@ -4,7 +4,7 @@
 
 	Theme Name: Hitchcock
     Text Domain: hitchcock
-    Version: 1.15
+    Version: 1.19
 	Author: Anders Norén
 	Author URI: http://www.andersnoren.se
     Theme URI: http://www.andersnoren.se/teman/hitchcock-wordpress-theme/
@@ -64,8 +64,6 @@ table {
 ol, ul { list-style:none; }
 
 blockquote:before, blockquote:after { content:""; }
-
-a { outline:none; }
 
 input[type=search] {
    -moz-appearance: none;
@@ -353,11 +351,14 @@ input[type="button"],
 .main-menu li + .header-search:before { margin-top: -12px; }
 
 .header-search .search-form {
-	width: auto;
-	min-width: 16px;
+	align-items: center;
+	display: flex;
 	position: absolute;
-	top: -22px;
-	left: 0;
+		bottom: 0;
+		left: 0;
+		top: 0;
+	transform: translateY(-5px);
+	width: 166px;
 }
 
 .header-search-container.active .search-form { display: block; }
@@ -377,17 +378,12 @@ input[type="button"],
 }
 
 .header-search .search-button {
-	display: block;
-	padding: 8px 0 0 0;
-	width: 16px;
 	background: #1d1d1d;
+	color: #999;
+	display: block;
 	font-size: 18px;
 	text-align: center;
-	color: #999;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
+	width: 16px;
 }
 
 .header-search .search-button:hover {
@@ -2012,7 +2008,9 @@ p.comment-form-author { margin-right: 5%; }
 /* Search Form --------------------------------------- */
 
 
-.search-form { position: relative; }
+.search-form { 
+	position: relative; 
+}
 
 .search-field {
 	display: block;
@@ -2030,23 +2028,30 @@ p.comment-form-author { margin-right: 5%; }
 	outline: none; 
 }
 
-.post-content a.search-button {
-	display: block;
-	width: 60px;
-	padding-top: 18px;
-	border: none !important;
-	font-size: 20px;
-	text-align: center;
-	color: #999;
-	position: absolute;
-	top: 1px;
-	right: 1px;
-	bottom: 1px;
+.search-button {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: transparent;
+	cursor: pointer;
+	padding: 0;
+	transition: color .15s linear;
 }
 
-.post-content a.search-button:hover { 
+.post-content .search-button {
+	border: none !important;
+	color: #999;
+	display: block;
+	font-size: 20px;
+	position: absolute;
+		bottom: 1px;
+		right: 1px;
+		top: 1px;
+	text-align: center;
+	width: 60px;
+}
+
+.post-content .search-button:hover { 
 	color: #666; 
-	cursor: pointer;
 }
 
 
@@ -2138,10 +2143,13 @@ img#wpstats {
 	
 	
 	.nav-toggle {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		color: #fff;
 		display: block;
 		padding: 16px 0;
 		background: rgba(0,0,0,0.1);
-		color: #fff;
+		width: 100%;
 	}
 	
 	.nav-toggle .bars {
@@ -2227,7 +2235,7 @@ img#wpstats {
 	
 	.mobile-navigation .search-button {
 		width: 60px;
-		padding: 23px 20px 0 0;
+		padding: 0 20px 0 0;
 		font-size: 20px;
 		text-align: center;
 		color: #999;
