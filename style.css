@@ -4,11 +4,11 @@
 
 	Theme Name: Hitchcock
     Text Domain: hitchcock
-    Version: 1.19
+    Version: 1.22
 	Author: Anders Norén
-	Author URI: http://www.andersnoren.se
-    Theme URI: http://www.andersnoren.se/teman/hitchcock-wordpress-theme/
-	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Gutenberg support, a social icon menu, Jetpack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styling and much more. Demo: http://www.andersnoren.se/themes/hitchcock/
+	Author URI: https://www.andersnoren.se
+    Theme URI: https://www.andersnoren.se/teman/hitchcock-wordpress-theme/
+	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor/Gutenberg support, a social icon menu, Jetpack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styling and much more. Demo: https://www.andersnoren.se/themes/hitchcock/
     Tags: blog, three-columns, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -222,7 +222,6 @@ input[type="button"],
 	padding: 23px 0;
 	position: relative;
 	text-transform: uppercase;
-	z-index: 10000;
 }
 
 .main-menu li:hover > a,
@@ -513,11 +512,12 @@ input[type="button"],
 .social-menu li a[href*="github.com"]::before { content: '\f09b'; }
 .social-menu li a[href*="instagram.com"]::before { content: '\f16d'; }
 .social-menu li a[href*="linkedin.com"]::before { content: '\f0e1'; }
-.social-menu li a[href*="pinterest.com"]::before { content: '\f0d2'; }
+.social-menu li a[href*="pinterest"]::before { content: '\f0d2'; }
 .social-menu li a[href*="plus.google.com"]::before { content: '\f0d5'; }
 .social-menu li a[href*="soundcloud.com"]::before { content: '\f1be'; }
 .social-menu li a[href*="tumblr.com"]::before { content: '\f173'; }
 .social-menu li a[href*="twitter.com"]::before { content: '\f099'; }
+.social-menu li a[href*="twitch.com"]::before { content: '\f1e8'; }
 .social-menu li a[href*="vimeo.com"]::before { content: '\f194'; }
 .social-menu li a[href*="wordpress.org"]::before,
 .social-menu li a[href*="wordpress.com"]::before { content: '\f19a'; }
@@ -1530,7 +1530,7 @@ input[type="submit"]:active {
 	margin-left: 0;
 }
 
-.post-content ul.wp-block-gallery > li: child {
+.post-content ul.wp-block-gallery > li:first-child {
 	margin-top: 0;
 }
 

@@ -69,6 +69,20 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.22 (2019-06-20)
+-------------------------
+- Fixed sub menus being overlapped by the menu link when on two lines
+- Updated Pinterest icon url to be domain independent
+- Added Twitch icon
+
+Version 1.21 (2019-04-07)
+-------------------------
+- Added the new wp_body_open() function, along with a function_exists check
+
+Version 1.20 (2019-01-11)
+-------------------------
+- Fixed fix for margin-top of first item in block: gallery
+
 Version 1.19 (2018-12-19)
 -------------------------
 - Combined index.php, archive.php and search.php into index.php
