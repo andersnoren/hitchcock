@@ -18,6 +18,8 @@
 			wp_body_open(); 
 		}
 		?>
+
+		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'hitchcock' ); ?></a>
 		
 		<div class="navigation">
 			
@@ -140,3 +142,5 @@
 			<?php endif; ?>
 			
 		</div><!-- .header -->
+
+		<main id="site-content">

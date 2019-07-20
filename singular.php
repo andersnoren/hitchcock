@@ -11,27 +11,31 @@ if ( have_posts() ) :
 				<div class="post-container">
 					
 					<?php 
-					
-					$post_format = get_post_format();
 
-					if ( $post_format == 'gallery' ) : ?>
+					if ( ! post_password_required() ) :
 					
-						<div class="featured-media">	
-			
-							<?php hitchcock_flexslider( 'post-image' ); ?>
-							
-							<div class="clear"></div>
-							
-						</div><!-- .featured-media -->
+						$post_format = get_post_format();
+
+						if ( $post_format == 'gallery' ) : ?>
 						
-					<?php elseif ( has_post_thumbnail() ) : ?>
-							
-						<div class="featured-media">
+							<div class="featured-media">	
 				
-							<?php the_post_thumbnail( 'post-image' ); ?>
+								<?php hitchcock_flexslider( 'post-image' ); ?>
+								
+								<div class="clear"></div>
+								
+							</div><!-- .featured-media -->
 							
-						</div><!-- .featured-media -->
-							
+						<?php elseif ( has_post_thumbnail() ) : ?>
+								
+							<div class="featured-media">
+					
+								<?php the_post_thumbnail( 'post-image' ); ?>
+								
+							</div><!-- .featured-media -->
+								
+						<?php endif; ?>
+						
 					<?php endif; ?>
 					
 					<div class="post-header">

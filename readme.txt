@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.4
-Tested up to: 5.0
+Tested up to: 5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,10 @@ FontAwesome font
 License: SIL Open Font License, 1.1 
 Source: http://www.fontawesome.io
 
+FontAwesome Code
+License: MIT License, https://opensource.org/licenses/MIT
+Source: https://www.fontawesome.io
+
 DoubleTapToGo.js 
 License: MIT License
 Source: https://github.com/dachcom-digital/jquery-doubletaptogo
@@ -68,6 +72,20 @@ Source: http://www.unsplash.com
 
 
 == Changelog ==
+
+Version 1.23 (2019-07-20)
+-------------------------
+- Added theme URI to style.css
+- Updated "Tested up to"
+- Added theme tags
+- Added skip link
+- Don't show comments if the post is password protected
+- Don't show the post thumbnail if the post is password protected
+- Fixed font issues in the block editor styles
+- Updated FontAwesome to the latest version, and added a lot more icons
+- Added licensing information for FontAwesome code
+- Better social menu styling
+- Updated screenshot resolution to 1200x900
 
 Version 1.22 (2019-06-20)
 -------------------------

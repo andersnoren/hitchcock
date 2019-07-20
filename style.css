@@ -4,14 +4,15 @@
 
 	Theme Name: Hitchcock
     Text Domain: hitchcock
-    Version: 1.22
+    Version: 1.23
 	Author: Anders Norén
 	Author URI: https://www.andersnoren.se
     Theme URI: https://www.andersnoren.se/teman/hitchcock-wordpress-theme/
 	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor/Gutenberg support, a social icon menu, Jetpack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styling and much more. Demo: https://www.andersnoren.se/themes/hitchcock/
-    Tags: blog, three-columns, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography
+    Tags: blog, three-columns, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography, block-styles, wide-blocks
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
+	Theme URI: https://www.andersnoren.se/teman/hitchcock-wordpress-theme/
 	
 	All files, unless otherwise stated, are released under the GNU General Public License
 	version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -131,10 +132,69 @@ img {
 :-ms-input-placeholder { color: #999; }
 
 
+/* Screen Reader Text ------------------------ */
+
+.screen-reader-text {
+	clip: rect( .1rem, .1rem, .1rem, .1rem );
+	height: .1rem;
+	overflow: hidden;
+	position: absolute !important;
+		left: -999999rem;
+	width: .1rem;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: .3rem;
+	box-shadow: 0 0 .2rem .2rem rgba( 0, 0, 0, 0.6 );
+	clip: auto !important;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 700;
+	height: auto;
+	left: .5rem;
+	line-height: normal;
+	padding: 1.5rem 2.3rem 1.4rem 2.3rem;
+	text-decoration: none;
+	top: .5rem;
+	width: auto;
+	z-index: 100000;
+}
+
+
+/* Skip Link --------------------------------- */
+
+.skip-link {
+	position: absolute;
+		left: -9999rem;
+		top: 2.5rem;
+	z-index: 999999999;
+}
+
+.skip-link:focus {
+	left: 2.5rem;
+	text-decoration: none;
+}
+
+
+/* Accessibility Settings -------------------- */
+
+@media ( prefers-reduced-motion: reduce ) {
+	* {
+		animation-duration: 0s !important;
+		transition-duration: 0s !important;
+	}
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /*	2.	Structure
 /* -------------------------------------------------------------------------------- */
 
+
+main {
+	display: block;
+}
 
 .section-inner {
 	width: 1040px;
@@ -456,23 +516,19 @@ input[type="button"],
 
 
 .social-menu { 
-	margin-top: 25px; 
-	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 19px; 
 }
 
 .social-menu li { 
-	display: inline-block;
-	margin: 0 2px;
+	display: block;
 	position: relative;
+	margin: 6px 3px 0 3px;
 }
 
 .social-menu li:first-child { margin-left: 0; }
-
-.screen-reader-text {
-	position: absolute;
-	top: -9999em;
-	left: -9999em;
-}
 
 .social-menu a {
 	display: block;
@@ -491,9 +547,9 @@ input[type="button"],
 }
 
 .social-menu li a::before {
-	content: '\f408';
+	content: '\f0c1';
 	display: inline-block;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5';
 	font-size: 16px;
 	text-align: center;
 	position: absolute;
@@ -505,24 +561,62 @@ input[type="button"],
 
 .wp-is-mobile .social-menu li a::before { margin-top: -7px; }
 
-.social-menu li a[href*="codepen.io"]::before { content: '\f1cb'; }
-.social-menu li a[href*="dribbble.com"]::before { content: '\f17d'; }
-.social-menu li a[href*="facebook.com"]::before { content: '\f09a'; }
-.social-menu li a[href*="flickr.com"]::before { content: '\f16e'; }
-.social-menu li a[href*="github.com"]::before { content: '\f09b'; }
-.social-menu li a[href*="instagram.com"]::before { content: '\f16d'; }
-.social-menu li a[href*="linkedin.com"]::before { content: '\f0e1'; }
-.social-menu li a[href*="pinterest"]::before { content: '\f0d2'; }
-.social-menu li a[href*="plus.google.com"]::before { content: '\f0d5'; }
-.social-menu li a[href*="soundcloud.com"]::before { content: '\f1be'; }
-.social-menu li a[href*="tumblr.com"]::before { content: '\f173'; }
-.social-menu li a[href*="twitter.com"]::before { content: '\f099'; }
-.social-menu li a[href*="twitch.com"]::before { content: '\f1e8'; }
-.social-menu li a[href*="vimeo.com"]::before { content: '\f194'; }
-.social-menu li a[href*="wordpress.org"]::before,
-.social-menu li a[href*="wordpress.com"]::before { content: '\f19a'; }
-.social-menu li a[href*="youtube.com"]::before { content: '\f167'; }
-.social-menu li a[href*="mailto"]::before { content: '\f0e0'; }
+/* NON-BRAND ICONS */
+
+.s-icons a[href*="mailto"]::before { content: '\f0e0'; }
+.s-icons a[href*="/feed/"]::before,
+.s-icons a[href*="rss"]::before { content: '\f09e'; }
+
+/* BRAND ICONS */
+
+.social-menu a[href*="500px.com"]::before { content: '\f26e'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="amazon.com"]::before { content: '\f270'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="angel.co"]::before { content: '\f209'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="audible.com"]::before { content: '\f373'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="behance.net"]::before { content: '\f1b4'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="blogger.com"]::before { content: '\f37d'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="codepen.io"]::before { content: '\f1cb'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="creativecommons.com"]::before { content: '\f25e'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="deviantart.com"]::before { content: '\f1bd'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="digg.com"]::before { content: '\f1a6'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="discordapp.com"]::before { content: '\f392'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="dribbble.com"]::before { content: '\f17d'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="ebay"]::before { content: '\f4f4'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="etsy.com"]::before { content: '\f2d7'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="facebook.com"]::before { content: '\f39e'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="flickr.com"]::before { content: '\f16e'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="github.com"]::before { content: '\f113'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="gitlab.com"]::before { content: '\f296'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="goodreads.com"]::before { content: '\f3a9'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="houzz"]::before { content: '\f27c'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="imdb.com"]::before { content: '\f2d8'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="instagram.com"]::before { content: '\f16d'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="kickstarter.com"]::before { content: '\f3bc'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="jsfiddle.net"]::before { content: '\f1cc'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="linkedin.com"]::before { content: '\f0e1'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="last.fm"]::before { content: '\f202'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="medium.com"]::before { content: '\f3c7'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="meetup.com"]::before { content: '\f2e0'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="mixcloud.com"]::before { content: '\f289'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="patreon.com"]::before { content: '\f3d9'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="pscp.tv"]::before { content: '\f3da'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="pinterest"]::before { content: '\f231'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="play.google.com"]::before { content: '\f3ab'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="plus.google.com"]::before { content: '\f0d5'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="producthunt.com"]::before { content: '\f288'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="quora.com"]::before { content: '\f2c4'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="reddit.com"]::before { content: '\f281'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="slack.com"]::before { content: '\f198'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="soundcloud.com"]::before { content: '\f1be'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="spotify.com"]::before { content: '\f1bc'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="tumblr.com"]::before { content: '\f173'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="twitch"]::before { content: '\f1e8'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="twitter.com"]::before { content: '\f099'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="vimeo.com"]::before { content: '\f27d'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="wordpress.org"]::before,
+.social-menu a[href*="wordpress.com"]::before { content: '\f411'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="youtube.com"]::before { content: '\f167'; font-family: 'Font Awesome 5 Brands'; }
+.social-menu a[href*="unsplash.com"]::before { content: '\f030'; font-family: 'Font Awesome 5'; }
 
 
 /* Header Bg Image --------------------------------------- */
@@ -688,7 +782,10 @@ input[type="button"],
 	display: block;
 }
 
-.featured-media img { margin: 0 auto; }
+.featured-media img { 
+	margin: 0 auto; 
+	width: 100%;
+}
 
 
 /* Post Header  ----------------------------------------- */
@@ -1352,9 +1449,9 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"],
 .button {
-	padding: 16px 20px;
 	border: none;
-	margin: none;
+	padding: 16px 20px;
+	margin: 0;
 	background: #3bc492;
 	border-radius: 3px;
 	font-size: 14px;
@@ -2282,6 +2379,7 @@ img#wpstats {
 	
 	.post-navigation p { 
 		font-size: 0.875em;
+		font-weight: 500;
 		display: inline; 
 	}
 	

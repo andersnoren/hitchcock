@@ -12,7 +12,11 @@
 
 .editor-rich-text__tinymce {
 	color: #333;
-	font-family: 'Droid Serif', Georgia, serif; 
+	font-family: 'Droid Serif', Georgia, serif;
+}
+
+.editor-styles-wrapper > * {
+	font-family: 'Droid Serif', Georgia, serif;
 }
 
 .editor-rich-text__tinymce * {
