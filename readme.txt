@@ -73,6 +73,14 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.24 (2020-03-30)
+-------------------------
+- Fixed issue with gallery block alignment after changes to the block markup in Core.
+- Updated the block editor styles for links to prevent them hitting elements outside of theme scope.
+- Limited the FontAwesome files to only include woff and woff2 files, reducing the theme file size by a large amount.
+- Updated the archive post previews to be square on mobile, so they always have the same aspect ratio.
+- Social menu: Added Xing, Snapchat.
+
 Version 1.23 (2019-07-20)
 -------------------------
 - Added theme URI to style.css
