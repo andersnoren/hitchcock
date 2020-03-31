@@ -73,6 +73,11 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 1.25 (2020-03-30)
+-------------------------
+- Social menu: Fixed targeting issue causing mail and feed links not getting the right icon.
+- Set font smoothing to antialiased.
+
 Version 1.24 (2020-03-30)
 -------------------------
 - Fixed issue with gallery block alignment after changes to the block markup in Core.
