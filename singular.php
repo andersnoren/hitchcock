@@ -18,21 +18,15 @@ if ( have_posts() ) :
 
 						if ( $post_format == 'gallery' ) : ?>
 						
-							<div class="featured-media">	
-				
+							<figure class="featured-media group">
 								<?php hitchcock_flexslider( 'post-image' ); ?>
-								
-								<div class="clear"></div>
-								
-							</div><!-- .featured-media -->
+							</figure><!-- .featured-media -->
 							
 						<?php elseif ( has_post_thumbnail() ) : ?>
 								
-							<div class="featured-media">
-					
+							<figure class="featured-media">
 								<?php the_post_thumbnail( 'post-image' ); ?>
-								
-							</div><!-- .featured-media -->
+							</figure><!-- .featured-media -->
 								
 						<?php endif; ?>
 						
@@ -52,18 +46,14 @@ if ( have_posts() ) :
 					
 					<div class="post-inner">
 							
-						<div class="post-content">
-						
+						<div class="post-content entry-content">
 							<?php the_content(); ?>
-						
 						</div><!-- .post-content -->
-						
-						<div class="clear"></div>
 						
 						<?php 
 						$args = array(
-							'before'           => '<div class="page-links"><span class="title">' . __( 'Pages:', 'hitchcock' ) . '</span>',
-							'after'            => '<div class="clear"></div></div>',
+							'before'           => '<div class="page-links group"><span class="title">' . __( 'Pages:', 'hitchcock' ) . '</span>',
+							'after'            => '</div>',
 							'link_before'      => '<span>',
 							'link_after'       => '</span>',
 							'separator'        => '',
@@ -95,7 +85,7 @@ if ( have_posts() ) :
 			
 							</div><!-- .post-meta -->
 						
-							<div class="post-navigation">
+							<div class="post-navigation group">
 								
 								<?php
 								
@@ -104,7 +94,7 @@ if ( have_posts() ) :
 
 								if ( ! empty( $prev_post ) ) : ?>
 									
-									<a class="post-nav-prev" title="<?php echo esc_attr( get_the_title( $prev_post->ID ) ); ?>" href="<?php echo get_permalink( $prev_post->ID ); ?>">					
+									<a class="post-nav-prev" href="<?php the_permalink( $prev_post->ID ); ?>">					
 										<p><?php _e( 'Next', 'hitchcock' ); ?><span class="hide"> <?php _e( 'Post', 'hitchcock' ); ?></span></p>
 										<span class="fa fw fa-angle-right"></span>
 									</a>
@@ -114,13 +104,11 @@ if ( have_posts() ) :
 								
 								if ( ! empty( $next_post ) ) : ?>
 								
-									<a class="post-nav-next" title="<?php echo esc_attr( get_the_title( $next_post->ID ) ); ?>" href="<?php echo get_permalink( $next_post->ID ); ?>">
+									<a class="post-nav-next" href="<?php the_permalink( $next_post->ID ); ?>">
 										<span class="fa fw fa-angle-left"></span>
 										<p><?php _e( 'Previous', 'hitchcock' ); ?><span class="hide"> <?php _e( 'Post', 'hitchcock' ); ?></span></p>
 									</a>
 								<?php endif; ?>
-								
-								<div class="clear"></div>
 							
 							</div><!-- .post-navigation -->
 

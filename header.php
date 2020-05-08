@@ -56,8 +56,6 @@
 					
 				</ul>
 				
-				<div class="clear"></div>
-				
 			</div><!-- .section-inner -->
 			
 			<button type="button" class="nav-toggle">
@@ -90,35 +88,27 @@
 			
 		</div><!-- .navigation -->
 
-		<?php $image_image_url = get_header_image() ? get_header_image() : get_template_directory_uri() . '/images/bg.jpg'; ?>
+		<?php $image_image_url = get_header_image() ? get_header_image() : get_template_directory_uri() . '/assets/images/bg.jpg'; ?>
 		
 		<div class="header-image" style="background-image: url( <?php echo $image_image_url; ?> );"></div>
 	
 		<div class="header section-inner">
 		
-			<?php 
+			<?php $site_title_elem 	= is_front_page() || ( is_home() && get_option( 'show_on_front' ) == 'posts' ) ? 'h1' : 'div';  ?>
+	
+			<<?php echo $site_title_elem; ?> class="blog-title">
+				<?php if ( get_theme_mod( 'custom_logo' ) ) : ?>
+					<?php hitchcock_custom_logo(); ?>
+				<?php else : ?>
+					<a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'title' ) ); ?></a>
+				<?php endif; ?>
+			</<?php echo $site_title_elem; ?>>
 			
-			if ( get_theme_mod( 'custom_logo' ) ) :
-
-				hitchcock_custom_logo();
-				
-			else : 
-				
-				$title_type = is_singular() ? '2' : '1'; ?>
-		
-				<h<?php echo $title_type; ?> class="blog-title">
-					<a href="<?php echo esc_url( home_url() ); ?>" title="<?php echo esc_attr( get_bloginfo( 'title' ) ); ?> &mdash; <?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
-				</h<?php echo $title_type; ?>>
-				
-			<?php endif;
+			<?php if ( get_bloginfo( 'description' ) ) : ?>
+				<div class="blog-description"><?php echo wp_kses_post( wpautop( get_bloginfo( 'description' ) ) ); ?></div>
+			<?php endif; ?>
 			
-			if ( get_bloginfo( 'description' ) ) : ?>
-			
-				<p class="blog-description"><?php echo bloginfo( 'description' ); ?></p>
-			
-			<?php endif;
-			
-			if ( has_nav_menu( 'social' ) ) : ?>
+			<?php if ( has_nav_menu( 'social' ) ) : ?>
 			
 				<ul class="social-menu">
 							

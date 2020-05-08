@@ -52,21 +52,15 @@ if ( have_comments() || comments_open() ) : ?>
 							
 					<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 						
-						<div class="comments-nav" role="navigation">
+						<div class="comments-nav group" role="navigation">
 						
 							<div class="fleft">
-												
 								<?php previous_comments_link( '&larr; ' . __( 'Older', 'hitchcock' ) ); ?>
-							
 							</div>
 							
 							<div class="fright">
-							
 								<?php next_comments_link( __( 'Newer', 'hitchcock' ) . ' &rarr;' ); ?>
-							
 							</div>
-							
-							<div class="clear"></div>
 							
 						</div><!-- .comment-nav-below -->
 						

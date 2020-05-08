@@ -1,8 +1,8 @@
 === Hitchcock ===
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-Requires at least: 4.4
-Tested up to: 5.2
+Requires at least: 4.5
+Tested up to: 5.4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,36 @@ Source: http://www.unsplash.com
 
 
 == Changelog ==
+
+Version 2.0.0 (2020-05-08)
+-------------------------
+- Increased "Tested up to" to 5.4.1.
+- Increased "Requires at least" to 4.5, since Hitchcock uses `custom_logo`.
+- Added the new `assets` folder, and moved images, styles and JavaScript to it.
+- Renamed the editor stylesheets.
+- Changed the screenshot to the `jpg` format, reducing file size by more than 600 KB.
+- Removed license.txt.
+- Added unique IDs to the search form and search field.
+- CSS: Cleanup (indentation, comment headings, etc).
+- CSS: Adjusted reset.
+- CSS: Added the new Element Base section, and made base styles more global, less specific.
+- CSS: Increased contrast of the light gray color, removed the medium gray color.
+- Moved the `Hitchcock_Customize` class to `/inc/classes/class-hitchcock-customize.php`.
+- Moved the archive pagination from a function to `pagination.php`.
+- Cleaned up ´index.php´, and moved modifications of the archive title to a `functions.php` filter where it belongs.
+- Removed a obsolete thumbnail admin CSS fix.
+- Removed removal of outline.
+- Only output Custom CSS as inline style if the accent color set differs from the default.
+- Restructured the custom CSS function, and added output of its CSS with `wp_add_inline_style()` instead of a `wp_head` action.
+- Added theme version to enqueues.
+- Fixed block editor buttons missing the Hitchcock button styles.
+- Updated clearing to use pseudos instead of a `.clear` element.
+- Removed title attributes from links.
+- Restructured site title output for better semantics.
+- CSS: Moved the block styles to their own section of the document.
+- Changed the "Regular" block editor font size to "Normal", to match the block editor naming convention.
+- Updated block editor styles.
+- Removed Customizer live JavaScript preview.
 
 Version 1.25 (2020-03-30)
 -------------------------

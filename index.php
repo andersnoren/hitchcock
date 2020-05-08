@@ -6,69 +6,33 @@
 	
 	$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
-	$archive_subtitle = '';
-	$archive_title = '';
+	$archive_prefix 		= hitchcock_get_archive_title_prefix();
+	$archive_title 			= get_the_archive_title();
+	$archive_description 	= get_the_archive_description();
 	
-	// Determine the archive titles
-	if ( ( 1 < $paged ) || is_archive() || is_search() ) {
-
-		if ( is_archive() ) {
-
-			if ( is_day() ) {
-				$archive_subtitle = __( 'Date', 'hitchcock' );
-				$archive_title = get_the_date( get_option( 'date_format' ) );
-			} elseif ( is_month() ) {
-				$archive_subtitle = __( 'Month', 'hitchcock' );
-				$archive_title = get_the_date( 'F Y' );
-			} elseif ( is_year() ) {
-				$archive_subtitle = __( 'Year', 'hitchcock' );
-				$archive_title = get_the_date( 'Y' );
-			} elseif ( is_category() ) {
-				$archive_subtitle = __( 'Category', 'hitchcock' );
-				$archive_title = single_cat_title( '', false );
-			} elseif ( is_tag() ) {
-				$archive_subtitle = __( 'Tag', 'hitchcock' );
-				$archive_title = single_tag_title( '', false );
-			} elseif ( is_author() ) {
-				$archive_subtitle = __( 'Author', 'hitchcock' );
-				$curauth = ( isset($_GET['author_name'] ) ) ? get_user_by( 'slug', $author_name) : get_userdata( intval( $author ) );
-				$archive_title = $curauth->display_name;
-			} else {
-				$archive_title = __( 'Archive', 'hitchcock' );
-			}
-
-		} elseif ( is_search() ) {
-
-			$archive_subtitle = __( 'Search Results', 'hitchcock' );
-			$archive_title = ' "' . get_search_query() . '"';
-
-		} else {
-
-			$archive_title = sprintf( __( 'Page %1$s of %2$s', 'hitchcock' ), $paged, $wp_query->max_num_pages );
-
-		}
-
-	}
+	if ( $archive_prefix || $archive_title || $archive_description ) : ?>
 	
-	if ( $archive_subtitle || $archive_title ) : ?>
-	
-		<div class="page-title">
+		<header class="archive-header">
 
-			<?php if ( $archive_subtitle ) : ?>
-				<p><?php echo $archive_subtitle; ?></p>
+			<?php if ( $archive_prefix ) : ?>
+				<p class="archive-title-prefix"><?php echo wp_kses_post( $archive_prefix ); ?></p>
 			<?php endif; ?>
 
 			<?php if ( $archive_title ) : ?>
-				<h4><?php echo $archive_title; ?></h4>
+				<h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
+			<?php endif; ?>
+
+			<?php if ( $archive_description ) : ?>
+				<div class="archive-description"><?php echo wp_kses_post( wpautop( $archive_description ) ); ?></div>
 			<?php endif; ?>
 			
-		</div><!-- .page-title -->
+		</header><!-- .archive-header -->
 	
 	<?php endif; ?>
 		
 	<?php if ( have_posts() ) : ?>
 
-		<div class="posts" id="posts">
+		<div class="posts group" id="posts">
 
 			<?php
 			while ( have_posts() ) : the_post();
@@ -77,8 +41,6 @@
 				
 			endwhile;
 			?>
-
-			<div class="clear"></div>
 			
 		</div><!-- .posts -->
 
@@ -106,7 +68,7 @@
 
 	<?php endif; ?>
 	
-	<?php hitchcock_archive_navigation(); ?>
+	<?php get_template_part( 'pagination' ); ?>
 		
 </div><!-- .content -->
 	              	        

@@ -5,9 +5,7 @@
    THEME SETUP
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_setup' ) ) {
-
+if ( ! function_exists( 'hitchcock_setup' ) ) :
 	function hitchcock_setup() {
 		
 		// Automatic feed
@@ -32,7 +30,7 @@ if ( ! function_exists( 'hitchcock_setup' ) ) {
 		$args = array(
 			'width'         => 1440,
 			'height'        => 900,
-			'default-image' => get_template_directory_uri() . '/images/bg.jpg',
+			'default-image' => get_template_directory_uri() . '/assets/images/bg.jpg',
 			'uploads'       => true,
 			'header-text'  	=> false
 			
@@ -57,90 +55,89 @@ if ( ! function_exists( 'hitchcock_setup' ) ) {
 		// Make the theme translation ready
 		load_theme_textdomain( 'hitchcock', get_template_directory() . '/languages' );
 		
-		$locale = get_locale();
-		$locale_file = get_template_directory() . "/languages/$locale.php";
-		if ( is_readable($locale_file) ) {
-			require_once($locale_file);
-		}
-		
 	}
 	add_action( 'after_setup_theme', 'hitchcock_setup' );
+endif;
 
-}
+
+/*	-----------------------------------------------------------------------------------------------
+	REQUIRED FILES
+	Include required files
+--------------------------------------------------------------------------------------------------- */
+
+// Handle Customizer settings
+require get_template_directory() . '/inc/classes/class-hitchcock-customize.php';
 
 
 /* ---------------------------------------------------------------------------------------------
    ENQUEUE SCRIPTS
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_load_javascript_files' ) ) {
-
+if ( ! function_exists( 'hitchcock_load_javascript_files' ) ) :
 	function hitchcock_load_javascript_files() {
 
-		if ( ! is_admin() ) {		
-			wp_register_script( 'hitchcock_flexslider', get_template_directory_uri() . '/js/flexslider.js', '', true );
-			wp_register_script( 'hitchcock_doubletaptogo', get_template_directory_uri() . '/js/doubletaptogo.js', '', true );
+		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-			wp_enqueue_script( 'hitchcock_global', get_template_directory_uri() . '/js/global.js', array( 'jquery', 'hitchcock_flexslider', 'hitchcock_doubletaptogo' ), '', true );
-			
-			if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
-			
-		}
+		wp_register_script( 'hitchcock_flexslider', get_template_directory_uri() . '/assets/js/flexslider.js', array(), $theme_version );
+		wp_register_script( 'hitchcock_doubletaptogo', get_template_directory_uri() . '/assets/js/doubletaptogo.js', array(), $theme_version );
+
+		wp_enqueue_script( 'hitchcock_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'hitchcock_flexslider', 'hitchcock_doubletaptogo' ), $theme_version );
+		
+		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
+
 	}
 	add_action( 'wp_enqueue_scripts', 'hitchcock_load_javascript_files' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    ENQUEUE STYLES
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_load_style' ) ) {
-
+if ( ! function_exists( 'hitchcock_load_style' ) ) :
 	function hitchcock_load_style() {
-		if ( ! is_admin() ) {
 
-			$dependencies = array();
+		if ( is_admin() ) return;
 
-			/**
-			 * Translators: If there are characters in your language that are not
-			 * supported by the theme fonts, translate this to 'off'. Do not translate
-			 * into your own language.
-			 */
-			$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
+		$dependencies = array();
+		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-			if ( 'off' !== $google_fonts ) {
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
-				// Register Google Fonts
-				wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
-				$dependencies[] = 'hitchcock_google_fonts';
-
-			}
-
-			wp_register_style( 'hitchcock_fontawesome', get_stylesheet_directory_uri() . '/fa/css/font-awesome.css' );
-			$dependencies[] = 'hitchcock_fontawesome';
-			
-			wp_enqueue_style( 'hitchcock_style', get_stylesheet_uri(), $dependencies );
+		if ( 'off' !== $google_fonts ) {
+			wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
+			$dependencies[] = 'hitchcock_google_fonts';
 		}
+
+		wp_register_style( 'hitchcock_fontawesome', get_stylesheet_directory_uri() . '/assets/fonts/font-awesome/css/font-awesome.css',array(), $theme_version );
+		$dependencies[] = 'hitchcock_fontawesome';
+		
+		wp_enqueue_style( 'hitchcock_style', get_stylesheet_uri(), $dependencies, $theme_version );
+
+		// Add custom colors as inline style
+		$inline_style = Hitchcock_Customize::get_inline_style();
+		if ( $inline_style ) {
+			wp_add_inline_style( 'hitchcock_style', $inline_style );
+		}
+
 	}
 	add_action( 'wp_print_styles', 'hitchcock_load_style' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    ADD EDITOR STYLES
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) {
-
+if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) :
 	function hitchcock_add_editor_styles() {
 
-		add_editor_style( 'hitchcock-editor-styles.css' );
+		add_editor_style( 'assets/css/hitchcock-classic-editor-styles.css' );
 
 		$dependencies = array();
 
@@ -152,81 +149,34 @@ if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) {
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
 		if ( 'off' !== $google_fonts ) {
-
 			$font_url = '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic';
 			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
-
 		}
 		
 	}
 	add_action( 'init', 'hitchcock_add_editor_styles' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    CHECK JAVASCRIPT SUPPORT
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_html_js_class' ) ) {
-
+if ( ! function_exists( 'hitchcock_html_js_class' ) ) :
 	function hitchcock_html_js_class() {
+
 		echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
+
 	}
 	add_action( 'wp_head', 'hitchcock_html_js_class', 1 );
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
-   ARCHIVE NAVIGATION
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'hitchcock_archive_navigation' ) ) {
-
-	function hitchcock_archive_navigation() {
-		
-		global $wp_query;
-		
-		if ( $wp_query->max_num_pages > 1 ) : ?>
-					
-			<div class="archive-nav">
-				
-				<?php 
-				if ( get_previous_posts_link() ) {
-					previous_posts_link( '<span class="fa fw fa-angle-left"></span>' );
-				} else {
-					echo '<span class="fa fw fa-angle-left"></span>';
-				} 
-
-				echo '<span class="sep">/</span>';
-
-				if ( get_next_posts_link() ) {
-					next_posts_link( '<span class="fa fw fa-angle-right"></span>' );
-				} else {
-					echo '<span class="fa fw fa-angle-right"></span>';
-				} 
-				?>
-				
-				<div class="clear"></div>
-					
-			</div><!-- .archive-nav-->
-							
-		<?php endif;
-	}
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    CUSTOM LOGO OUTPUT
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_custom_logo' ) ) {
-
+if ( ! function_exists( 'hitchcock_custom_logo' ) ) :
 	function hitchcock_custom_logo() {
 
 		// Get the logo
@@ -247,46 +197,120 @@ if ( ! function_exists( 'hitchcock_custom_logo' ) ) {
 
 			?>
 			
-			<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
+			<a href="<?php echo esc_url( home_url() ); ?>" class="custom-logo-link">
 				<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" />
+				<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
 			</a>
 
 			<?php
 		}
 
 	}
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
-   ADMIN CSS
+   REMOVE ARCHIVE PREFIXES
    --------------------------------------------------------------------------------------------- */
 
+if ( ! function_exists( 'hitchcock_remove_archive_title_prefix' ) ) :
+	function hitchcock_remove_archive_title_prefix( $title ) {
 
-if ( ! function_exists( 'hitchcock_admin_css' ) ) {
+		global $paged;
+		global $wp_query;
 
-	function hitchcock_admin_css() { ?>
-		<style type="text/css">
-			#postimagediv #set-post-thumbnail img {
-				max-width: 100%;
-				height: auto;
+		if ( is_category() ) {
+			$title = single_cat_title( '', false );
+		} elseif ( is_tag() ) {
+			$title = single_tag_title( '', false );
+		} elseif ( is_author() ) {
+			$title = '<span class="vcard">' . get_the_author() . '</span>';
+		} elseif ( is_year() ) {
+			$title = get_the_date( 'Y' );
+		} elseif ( is_month() ) {
+			$title = get_the_date( 'F Y' );
+		} elseif ( is_day() ) {
+			$title = get_the_date( get_option( 'date_format' ) );
+		} elseif ( is_tax( 'post_format' ) ) {
+			if ( is_tax( 'post_format', 'post-format-aside' ) ) {
+				$title = _x( 'Asides', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
+				$title = _x( 'Galleries', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
+				$title = _x( 'Images', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
+				$title = _x( 'Videos', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
+				$title = _x( 'Quotes', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
+				$title = _x( 'Links', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
+				$title = _x( 'Statuses', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
+				$title = _x( 'Audio', 'post format archive title', 'hitchcock' );
+			} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
+				$title = _x( 'Chats', 'post format archive title', 'hitchcock' );
 			}
-		</style>
-		<?php
+		} elseif ( is_post_type_archive() ) {
+			$title = post_type_archive_title( '', false );
+		} elseif ( is_tax() ) {
+			$title = single_term_title( '', false );
+		} elseif ( is_search() ) {
+			$title = '&ldquo;' . get_search_query() . '&rdquo;';
+		} else if ( is_home() && $paged == 1 ) {
+			return '';
+		} else {
+			$title = sprintf( __( 'Page %1$s of %2$s', 'hitchcock' ), $paged, $wp_query->max_num_pages );
+		} // End if().
+		return $title;
+		
 	}
-	add_action( 'admin_head', 'hitchcock_admin_css' );
+	add_filter( 'get_the_archive_title', 'hitchcock_remove_archive_title_prefix' );
+endif;
 
-}
+
+/* ---------------------------------------------------------------------------------------------
+   GET ARCHIVE PREFIX
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'hitchcock_get_archive_title_prefix' ) ) :
+	function hitchcock_get_archive_title_prefix() {
+
+		global $paged;
+
+		if ( is_category() ) {
+			$title_prefix = __( 'Category', 'hitchcock' );
+		} elseif ( is_tag() ) {
+			$title_prefix = __( 'Tag', 'hitchcock' );
+		} elseif ( is_author() ) {
+			$title_prefix = __( 'Author', 'hitchcock' );
+		} elseif ( is_year() ) {
+			$title_prefix = __( 'Year', 'hitchcock' );
+		} elseif ( is_month() ) {
+			$title_prefix = __( 'Month', 'hitchcock' );
+		} elseif ( is_day() ) {
+			$title_prefix = __( 'Day', 'hitchcock' );
+		} elseif ( is_tax() ) {
+			$tax = get_taxonomy( get_queried_object()->taxonomy );
+			$title_prefix = $tax->labels->singular_name;
+		} elseif ( is_search() ) {
+			$title_prefix = __( 'Search Results', 'hitchcock' );
+		} else if ( is_home() && $paged == 1 ) {
+			return '';
+		} else {
+			$title_prefix = __( 'Archives', 'hitchcock' );
+		}
+		return $title_prefix;
+
+	}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    BODY CLASSES
    --------------------------------------------------------------------------------------------- */
 
- 
-if ( ! function_exists( 'hitchcock_body_classes' ) ) {
-
+if ( ! function_exists( 'hitchcock_body_classes' ) ) :
 	function hitchcock_body_classes( $classes ) {
 	
 		// Check if we're on singular
@@ -310,19 +334,17 @@ if ( ! function_exists( 'hitchcock_body_classes' ) ) {
 		}
 		
 		return $classes;
+
 	}
 	add_filter( 'body_class', 'hitchcock_body_classes' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    FLEXSLIDER FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_flexslider' ) ) {
-
+if ( ! function_exists( 'hitchcock_flexslider' ) ) :
 	function hitchcock_flexslider( $size ) {
 
 		$attachment_parent = is_page() ? $post->ID : get_the_ID();
@@ -337,42 +359,39 @@ if ( ! function_exists( 'hitchcock_flexslider' ) ) {
 			'post_mime_type' => 'image',
 		) );
 
-		if ( $images ) { ?>
+		if ( $images ) : ?>
 		
 			<div class="flexslider">
 			
 				<ul class="slides">
 		
-					<?php foreach( $images as $image ) { 
-					
+					<?php foreach ( $images as $image ) :
 						$attimg = wp_get_attachment_image( $image->ID, $size ); ?>
-						
-						<li>
-							<?php echo $attimg; ?>
-						</li>
-						
-					<?php } ?>
+						<li><?php echo $attimg; ?></li>
+					<?php endforeach; ?>
 			
-				</ul>
+				</ul><!-- .slides -->
 				
-			</div><?php
+			</div><!-- .flexslider -->
 			
-		}
-	}
+			<?php
+			
+		endif;
 
-}
+	}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    RELATED POSTS FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_related_posts' ) ) {
-
-	function hitchcock_related_posts( $number_of_posts = 3 ) { ?>
+if ( ! function_exists( 'hitchcock_related_posts' ) ) :
+	function hitchcock_related_posts( $number_of_posts = 3 ) { 
 		
-		<div class="related-posts posts section-inner">
+		?>
+		
+		<div class="related-posts posts section-inner group">
 					
 			<?php
 
@@ -392,7 +411,7 @@ if ( ! function_exists( 'hitchcock_related_posts' ) ) {
 
 			$categories = get_the_category();
 
-			foreach( $categories as $category ) {
+			foreach ( $categories as $category ) {
 				$cat_ids[] = $category->cat_ID;
 			}
 
@@ -412,7 +431,7 @@ if ( ! function_exists( 'hitchcock_related_posts' ) ) {
 			// If either the category query or random query hit pay dirt, output the posts
 			if ( $related_posts ) :
 				
-				foreach( $related_posts as $post ) :
+				foreach ( $related_posts as $post ) :
 			
 					setup_postdata( $post );
 
@@ -425,26 +444,22 @@ if ( ! function_exists( 'hitchcock_related_posts' ) ) {
 			endif;
 			
 			?>
-					
-			<div class="clear"></div>
 
 		</div><!-- .related-posts --> 
 
 		<?php
 		
 	}
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    COMMENT FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'hitchcock_comment' ) ) {
-
+if ( ! function_exists( 'hitchcock_comment' ) ) :
 	function hitchcock_comment( $comment, $args, $depth ) {
+
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
 			case 'trackback' :
@@ -466,7 +481,7 @@ if ( ! function_exists( 'hitchcock_comment' ) ) {
 				
 				<h4 class="comment-title">
 					<?php echo get_comment_author_link(); ?>
-					<span><a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ) ?>" title="<?php echo get_comment_date() . ' at ' . get_comment_time(); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></a>
+					<span><a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ) ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></a>
 					<?php
 					if ( $post == get_post( $post->ID ) ) {
 						if ( $comment->user_id === $post->post_author )
@@ -510,180 +525,15 @@ if ( ! function_exists( 'hitchcock_comment' ) ) {
 			break;
 		endswitch;
 	}
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
-   THEME OPTIONS
-   --------------------------------------------------------------------------------------------- */
-
-
-class hitchcock_customize {
-
-	public static function hitchcock_register( $wp_customize ) {
-
-		// Hitchcock theme options section
-		$wp_customize->add_section( 'hitchcock_options', array(
-			'title' 		=> __( 'Theme Options', 'hitchcock' ),
-			'priority' 		=> 35,
-			'capability' 	=> 'edit_theme_options',
-			'description' 	=> __( 'Customize the theme settings for Hitchcock.', 'hitchcock' ),
-		) );
-
-
-		/* 2X Header Logo ----------------------------- */
-
-
-		$wp_customize->add_setting( 'hitchcock_retina_logo', array(
-			'capability' 		=> 'edit_theme_options',
-			'sanitize_callback' => 'hitchcock_sanitize_checkbox',
-			'transport'			=> 'postMessage'
-		) );
-
-		$wp_customize->add_control( 'hitchcock_retina_logo', array(
-			'type' 			=> 'checkbox',
-			'section' 		=> 'title_tagline',
-			'priority'		=> 9,
-			'label' 		=> __( 'Retina logo', 'hitchcock' ),
-			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'hitchcock' ),
-		) );
-
-
-		/* Always show titles setting ----------------------------- */
-
-
-		$wp_customize->add_setting( 'hitchcock_show_titles', array(
-			'capability' 		=> 'edit_theme_options',
-			'sanitize_callback' => 'hitchcock_sanitize_checkbox',
-			'transport'			=> 'postMessage'
-		) );
-
-		$wp_customize->add_control( 'hitchcock_show_titles', array(
-			'type' 			=> 'checkbox',
-			'section' 		=> 'hitchcock_options', 
-			'label' 		=> __( 'Show Preview Titles', 'hitchcock' ),
-			'description' 	=> __( 'Check to always show the titles in the post previews.', 'hitchcock' ),
-		) );
-
-
-		/* Custom accent color ----------------------------- */
-
-
-		$wp_customize->add_setting( 'hitchcock_accent_color', array(
-			'default' 			=> '#3bc492', 
-			'type' 				=> 'theme_mod', 
-			'transport' 		=> 'postMessage', 
-			'sanitize_callback' => 'sanitize_hex_color'
-		) );
-
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'hitchcock_accent_color', array(
-			'label' 	=> __( 'Accent Color', 'hitchcock' ), 
-			'section' 	=> 'hitchcock_options',
-			'settings' 	=> 'hitchcock_accent_color', 
-		) ) );
-
-		// Make built-in controls use live-JS preview
-		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-		$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-
-		// SANITATION
-
-		// Sanitize boolean for checkbox
-		function hitchcock_sanitize_checkbox( $checked ) {
-			return ( ( isset( $checked ) && true == $checked ) ? true : false );
-		}
-
-	}
-
-	public static function hitchcock_header_output() {
-
-		echo '<!-- Customizer CSS -->';
-
-		echo '<style type="text/css">';
-		
-			self::hitchcock_generate_css( 'body a', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( 'body a:hover', 'color', 'hitchcock_accent_color' );
-
-			self::hitchcock_generate_css( '.blog-title a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.social-menu a:hover', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post:hover .archive-post-title', 'color', 'hitchcock_accent_color' );
-
-			self::hitchcock_generate_css( '.post-content a', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content a:hover', 'border-bottom-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content p.pull', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content input[type="submit"]', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content input[type="button"]', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content input[type="reset"]', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content input:focus', 'border-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.post-content textarea:focus', 'border-color', 'hitchcock_accent_color' );
-
-			self::hitchcock_generate_css( '.post-content .has-accent-color', 'color', 'accent_color' );
-			self::hitchcock_generate_css( '.post-content .has-accent-background-color', 'background-color', 'accent_color' );
-
-			self::hitchcock_generate_css( '.button', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.page-links a:hover', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comments .pingbacks li a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-header h4 a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-form input:focus', 'border-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-form textarea:focus', 'border-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.form-submit #submit', 'background-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-title .url:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-actions a', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.comment-actions a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.archive-nav a:hover', 'color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '#infinite-handle:hover', 'background', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.credits p:first-child a:hover', 'color', 'hitchcock_accent_color' );
-
-			self::hitchcock_generate_css( '.nav-toggle.active .bar', 'background-color', 'hitchcock_accent_color' );
-			self::hitchcock_generate_css( '.mobile-menu a:hover', 'color', 'hitchcock_accent_color' );
-
-		echo '</style>';
-
-		echo '<!-- /Customizer CSS -->';
-
-	}
-
-	public static function hitchcock_live_preview() {
-		wp_enqueue_script( 'hitchcock-themecustomizer', get_template_directory_uri() . '/js/theme-customizer.js', array(  'jquery', 'customize-preview' ), '', true );
-	}
-
-	public static function hitchcock_generate_css( $selector, $style, $mod_name, $prefix='', $postfix='', $echo = true ) {
-		$return = '';
-		$mod = get_theme_mod( $mod_name );
-
-		if ( ! empty( $mod ) ) { 
-
-			$return = sprintf( '%s { %s:%s; }', $selector, $style, $prefix . $mod . $postfix );
-
-			if ( $echo ) echo $return;
-
-		}
-
-		return $return;
-	}
-}
-
-// Setup the Theme Customizer settings and controls...
-add_action( 'customize_register', array( 'hitchcock_customize', 'hitchcock_register' ) );
-
-// Output custom CSS to live site
-add_action( 'wp_head', array( 'hitchcock_customize', 'hitchcock_header_output' ) );
-
-// Enqueue live preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init', array( 'hitchcock_customize', 'hitchcock_live_preview' ) );
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    SPECIFY GUTENBERG SUPPORT
 ------------------------------------------------------------------------------------------------ */
 
-
-if ( ! function_exists( 'hitchcock_add_gutenberg_features' ) ) :
-
-	function hitchcock_add_gutenberg_features() {
+if ( ! function_exists( 'hitchcock_add_block_editor_features' ) ) :
+	function hitchcock_add_block_editor_features() {
 
 		/* Gutenberg Features --------------------------------------- */
 
@@ -710,14 +560,9 @@ if ( ! function_exists( 'hitchcock_add_gutenberg_features' ) ) :
 				'color' => '#555',
 			),
 			array(
-				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Gutenberg palette', 'hitchcock' ),
-				'slug' 	=> 'medium-gray',
-				'color' => '#777',
-			),
-			array(
 				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Gutenberg palette', 'hitchcock' ),
 				'slug' 	=> 'light-gray',
-				'color' => '#999',
+				'color' => '#757575',
 			),
 			array(
 				'name' 	=> _x( 'White', 'Name of the white color in the Gutenberg palette', 'hitchcock' ),
@@ -736,10 +581,10 @@ if ( ! function_exists( 'hitchcock_add_gutenberg_features' ) ) :
 				'slug' 		=> 'small',
 			),
 			array(
-				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'hitchcock' ),
-				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'hitchcock' ),
+				'name' 		=> _x( 'Normal', 'Name of the regular font size in Gutenberg', 'hitchcock' ),
+				'shortName' => _x( 'N', 'Short name of the regular font size in the Gutenberg editor.', 'hitchcock' ),
 				'size' 		=> 16,
-				'slug' 		=> 'regular',
+				'slug' 		=> 'normal',
 			),
 			array(
 				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'hitchcock' ),
@@ -756,21 +601,19 @@ if ( ! function_exists( 'hitchcock_add_gutenberg_features' ) ) :
 		) );
 
 	}
-	add_action( 'after_setup_theme', 'hitchcock_add_gutenberg_features' );
-
+	add_action( 'after_setup_theme', 'hitchcock_add_block_editor_features' );
 endif;
 
 
 /* ---------------------------------------------------------------------------------------------
-   GUTENBERG EDITOR STYLES
+   BLOCK EDITOR STYLES
    --------------------------------------------------------------------------------------------- */
 
-
 if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
-
 	function hitchcock_block_editor_styles() {
 
 		$dependencies = array();
+		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
 		/**
 		 * Translators: If there are characters in your language that are not
@@ -780,19 +623,13 @@ if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
 		if ( 'off' !== $google_fonts ) {
-
-			// Register Google Fonts
 			wp_register_style( 'hitchcock-block-editor-styles-font', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,50,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
 			$dependencies[] = 'hitchcock-block-editor-styles-font';
-
 		}
 
 		// Enqueue the editor styles
-		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/hitchcock-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/assets/css/hitchcock-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'hitchcock_block_editor_styles', 1 );
-
 endif;
-
-?>

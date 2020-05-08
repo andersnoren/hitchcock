@@ -63,7 +63,5 @@ jQuery(document).ready(function($) {
 ( function( $ ) {
     $( document.body ).on( 'post-load', function () {
         $('.infinite-loader').remove();
-        $('.posts .clear').remove();
-		$('.posts').append('<div class="clear"></div>');
     } );
 } )( jQuery );

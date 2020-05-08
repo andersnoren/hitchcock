@@ -7,9 +7,7 @@
 		<div class="post-container">
 			
 			<div class="post-header">
-			
 				<h2 class="post-title"><?php _e( 'Error 404', 'hitchcock' ); ?></h2>
-														
 			</div><!-- .post-header -->
 	
 			<div class="post-inner">
