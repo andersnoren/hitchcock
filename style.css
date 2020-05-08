@@ -1319,7 +1319,9 @@ input[type="button"],
 	overflow: hidden;
 }
 
-.flexslider ul, .flexslider ol, .flexslider li {
+.flexslider ul, 
+.flexslider ol, 
+.flexslider li {
 	list-style: none;
 	margin: 0;
 }
