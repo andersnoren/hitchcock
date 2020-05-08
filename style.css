@@ -4,7 +4,7 @@
 
 	Theme Name: Hitchcock
     Text Domain: hitchcock
-    Version: 2.0.0
+    Version: 2.0.1
 	Author: Anders Norén
 	Author URI: https://www.andersnoren.se
     Theme URI: https://www.andersnoren.se/teman/hitchcock-wordpress-theme/
@@ -1319,7 +1319,7 @@ input[type="button"],
 	overflow: hidden;
 }
 
-.flexlider ul, .flexslider ol, .flexslider li {
+.flexslider ul, .flexslider ol, .flexslider li {
 	list-style: none;
 	margin: 0;
 }
@@ -1369,12 +1369,14 @@ input[type="button"],
 .flex-control-nav {
 	text-align: center;
 	position: absolute;
-	bottom: -16px;
+	bottom: -32px;
 	left: 0;
 	right: 0;
 }
 
-.flexslider:hover .flex-control-nav { bottom: 16px; }
+.flexslider:hover .flex-control-nav { 
+	bottom: 16px; 
+}
 
 .flex-control-nav li {
 	display: inline-block;

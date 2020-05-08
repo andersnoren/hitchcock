@@ -73,6 +73,10 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 2.0.1 (2020-05-09)
+-------------------------
+- Fixed style issues with gallery format and the Jetpack Infinite Scroll loader.
+
 Version 2.0.0 (2020-05-08)
 -------------------------
 - Increased "Tested up to" to 5.4.1.
