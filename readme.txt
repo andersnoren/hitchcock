@@ -73,6 +73,10 @@ Source: http://www.unsplash.com
 
 == Changelog ==
 
+Version 2.0.2 (2020-05-10)
+-------------------------
+- Fixed the name attribute in `searchform.php` resulting in broken search strings.
+
 Version 2.0.1 (2020-05-09)
 -------------------------
 - Fixed style issues with gallery format and the Jetpack Infinite Scroll loader.
