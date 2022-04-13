@@ -2,7 +2,8 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 5.4.1
+Tested up to: 5.9
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +73,17 @@ Source: http://www.unsplash.com
 
 
 == Changelog ==
+
+Version 2.1 (2022-04-13)
+-------------------------
+- Feature: Added two widget areas to the footer, with styles.
+- Feature: Added a Customizer option for disabling Google Fonts.
+- Fixed layout of nested alignwide/alignfull blocks.
+- Remove the top/bottom margin of first/last elements in certain block containers.
+- Moved the Customizer accent color setting to the `colors` Customizer panel.
+- Fixed order of CSS sections.
+- Added "Tested up to" and "Requires PHP" to style.css and readme.txt.
+- Updated URLs to andersnoren.se to omit the www part.
 
 Version 2.0.2 (2020-05-10)
 -------------------------

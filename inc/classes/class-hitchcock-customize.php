@@ -34,7 +34,7 @@ if ( ! class_exists( 'Hitchcock_Customize' ) ) :
 				'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'hitchcock' ),
 			) );
 
-			/* Always show titles setting ---- */
+			/* Always show titles ------------ */
 
 			$wp_customize->add_setting( 'hitchcock_show_titles', array(
 				'capability' 		=> 'edit_theme_options',
@@ -49,18 +49,31 @@ if ( ! class_exists( 'Hitchcock_Customize' ) ) :
 				'description' 	=> __( 'Check to always show the titles in the post previews.', 'hitchcock' ),
 			) );
 
+			/* Disable Google Fonts ---------- */
+
+			$wp_customize->add_setting( 'hitchcock_disable_google_fonts', array(
+				'capability' 		=> 'edit_theme_options',
+				'sanitize_callback' => 'hitchcock_sanitize_checkbox'
+			) );
+
+			$wp_customize->add_control( 'hitchcock_disable_google_fonts', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'hitchcock_options', 
+				'label' 		=> __( 'Disable Google Fonts', 'hitchcock' ),
+				'description' 	=> __( 'Check to disable Google Fonts in the theme.', 'hitchcock' ),
+			) );
+
 			/* Custom accent color ----------- */
 
 			$wp_customize->add_setting( 'hitchcock_accent_color', array(
-				'default' 			=> '#3bc492', 
-				'type' 				=> 'theme_mod', 
-				'transport' 		=> 'postMessage', 
+				'default' 			=> '#3bc492',
+				'type' 				=> 'theme_mod',
 				'sanitize_callback' => 'sanitize_hex_color'
 			) );
 
 			$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'hitchcock_accent_color', array(
 				'label' 	=> __( 'Accent Color', 'hitchcock' ), 
-				'section' 	=> 'hitchcock_options',
+				'section' 	=> 'colors',
 				'settings' 	=> 'hitchcock_accent_color', 
 			) ) );
 
@@ -84,7 +97,7 @@ if ( ! class_exists( 'Hitchcock_Customize' ) ) :
 			if ( $accent_color == $accent_default ) return;
 
 			$css_data = array(
-				'background-color' 	=> 'input[type="submit"], input[type="button"], input[type="reset"], :root .has-accent-background-color, .button, :root .wp-block-file__button, :root .wp-block-button__link, .page-links a:hover, .form-submit #submit, #infinite-handle:hover, .nav-toggle.active .bar, .social-menu a:hover',
+				'background-color' 	=> 'input[type="submit"], input[type="button"], input[type="reset"], :root .has-accent-background-color, .button, :root .wp-block-file__button, :root .wp-block-button__link, :root .wp-block-search__button, .page-links a:hover, .form-submit #submit, #infinite-handle:hover, .nav-toggle.active .bar, .social-menu a:hover',
 				'border-color' 		=> 'input:focus, textarea:focus',
 				'color' 			=> 'a, .blog-title a:hover, .post-content p.pull, :root .has-accent-color, .comments .pingbacks li a:hover, .comment-header h4 a:hover, .comment-title .url:hover, .archive-nav a:hover, .credits p:first-child a:hover, .mobile-menu a:hover, :root .is-style-outline .wp-block-button__link, :root .wp-block-button__link.is-style-outline',
 			);

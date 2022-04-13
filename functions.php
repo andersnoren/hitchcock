@@ -109,12 +109,12 @@ if ( ! function_exists( 'hitchcock_load_style' ) ) :
 		 */
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
-		if ( 'off' !== $google_fonts ) {
+		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
 			wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
 			$dependencies[] = 'hitchcock_google_fonts';
 		}
 
-		wp_register_style( 'hitchcock_fontawesome', get_stylesheet_directory_uri() . '/assets/fonts/font-awesome/css/font-awesome.css',array(), $theme_version );
+		wp_register_style( 'hitchcock_fontawesome', get_template_directory_uri() . '/assets/fonts/font-awesome/css/font-awesome.css', array(), $theme_version );
 		$dependencies[] = 'hitchcock_fontawesome';
 		
 		wp_enqueue_style( 'hitchcock_style', get_stylesheet_uri(), $dependencies, $theme_version );
@@ -148,7 +148,7 @@ if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) :
 		 */
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
-		if ( 'off' !== $google_fonts ) {
+		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
 			$font_url = '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic';
 			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
 		}
@@ -379,6 +379,40 @@ if ( ! function_exists( 'hitchcock_flexslider' ) ) :
 		endif;
 
 	}
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   REGISTER SIDEBAR
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'hitchcock_sidebar_registration' ) ) :
+	function hitchcock_sidebar_registration() {
+
+		// Arguments used in all register_sidebar() calls
+		$shared_args = array(
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+			'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
+			'after_widget'  => '</div></div>',
+		);
+
+		// Footer #1
+		register_sidebar( array_merge( $shared_args, array(
+			'name' 			=> __( 'Footer #1', 'hitchcock' ),
+			'id' 			=> 'footer-one',
+			'description' 	=> __( 'Widgets in this area will be displayed in the first column in the footer.', 'hitchcock' ),
+		) ) );
+
+		// Footer #2
+		register_sidebar( array_merge( $shared_args, array(
+			'name' 			=> __( 'Footer #2', 'hitchcock' ),
+			'id' 			=> 'footer-two',
+			'description' 	=> __( 'Widgets in this area will be displayed in the second column in the footer.', 'hitchcock' ),
+		) ) );
+
+	}
+	add_action( 'widgets_init', 'hitchcock_sidebar_registration' );
 endif;
 
 
@@ -622,7 +656,7 @@ if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
 		 */
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
 
-		if ( 'off' !== $google_fonts ) {
+		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
 			wp_register_style( 'hitchcock-block-editor-styles-font', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,50,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
 			$dependencies[] = 'hitchcock-block-editor-styles-font';
 		}
