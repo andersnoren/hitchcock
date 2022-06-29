@@ -1,0 +1,79 @@
+@font-face {
+	font-family: 'Droid Serif';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/droid-serif-400.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Droid Serif';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/droid-serif-400italic.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Droid Serif';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url( ../fonts/droid-serif-700.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Droid Serif';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url( ../fonts/droid-serif-700italic.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-regular.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-italic.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-500.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-600.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-700.woff2 ) format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url( ../fonts/montserrat-v24-latin-700italic.woff2 ) format('woff2');
+}

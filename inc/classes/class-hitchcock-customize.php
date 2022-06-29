@@ -49,20 +49,6 @@ if ( ! class_exists( 'Hitchcock_Customize' ) ) :
 				'description' 	=> __( 'Check to always show the titles in the post previews.', 'hitchcock' ),
 			) );
 
-			/* Disable Google Fonts ---------- */
-
-			$wp_customize->add_setting( 'hitchcock_disable_google_fonts', array(
-				'capability' 		=> 'edit_theme_options',
-				'sanitize_callback' => 'hitchcock_sanitize_checkbox'
-			) );
-
-			$wp_customize->add_control( 'hitchcock_disable_google_fonts', array(
-				'type' 			=> 'checkbox',
-				'section' 		=> 'hitchcock_options', 
-				'label' 		=> __( 'Disable Google Fonts', 'hitchcock' ),
-				'description' 	=> __( 'Check to disable Google Fonts in the theme.', 'hitchcock' ),
-			) );
-
 			/* Custom accent color ----------- */
 
 			$wp_customize->add_setting( 'hitchcock_accent_color', array(

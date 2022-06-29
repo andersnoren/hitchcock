@@ -102,17 +102,8 @@ if ( ! function_exists( 'hitchcock_load_style' ) ) :
 		$dependencies = array();
 		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
-
-		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
-			wp_register_style( 'hitchcock_google_fonts', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
-			$dependencies[] = 'hitchcock_google_fonts';
-		}
+		wp_register_style( 'hitchcock_google_fonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		$dependencies[] = 'hitchcock_google_fonts';
 
 		wp_register_style( 'hitchcock_fontawesome', get_template_directory_uri() . '/assets/fonts/font-awesome/css/font-awesome.css', array(), $theme_version );
 		$dependencies[] = 'hitchcock_fontawesome';
@@ -137,21 +128,7 @@ endif;
 if ( ! function_exists( 'hitchcock_add_editor_styles' ) ) :
 	function hitchcock_add_editor_styles() {
 
-		add_editor_style( 'assets/css/hitchcock-classic-editor-styles.css' );
-
-		$dependencies = array();
-
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
-
-		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
-			$font_url = '//fonts.googleapis.com/css?family=Montserrat:400,400italic,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic';
-			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
-		}
+		add_editor_style( array( 'assets/css/hitchcock-classic-editor-styles.css', 'assets/css/fonts.css' ) );
 		
 	}
 	add_action( 'init', 'hitchcock_add_editor_styles' );
@@ -646,23 +623,10 @@ endif;
 if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
 	function hitchcock_block_editor_styles() {
 
-		$dependencies = array();
 		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'hitchcock' );
-
-		if ( ( ! get_theme_mod( 'hitchcock_disable_google_fonts' ) ) && ( 'off' !== $google_fonts ) ) {
-			wp_register_style( 'hitchcock-block-editor-styles-font', '//fonts.googleapis.com/css?family=Montserrat:400,400italic,50,500,600,700,700italic|Droid+Serif:400,400italic,700,700italic', false, 1.0, 'all' );
-			$dependencies[] = 'hitchcock-block-editor-styles-font';
-		}
-
-		// Enqueue the editor styles
-		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/assets/css/hitchcock-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
+		wp_register_style( 'hitchcock-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/assets/css/hitchcock-block-editor-styles.css' ), array( 'hitchcock-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'hitchcock_block_editor_styles', 1 );
