@@ -102,7 +102,7 @@ if ( ! function_exists( 'hitchcock_load_style' ) ) :
 		$dependencies = array();
 		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-		wp_register_style( 'hitchcock_google_fonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'hitchcock_google_fonts', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		$dependencies[] = 'hitchcock_google_fonts';
 
 		wp_register_style( 'hitchcock_fontawesome', get_template_directory_uri() . '/assets/fonts/font-awesome/css/font-awesome.css', array(), $theme_version );
@@ -625,7 +625,7 @@ if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
 
 		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
-		wp_register_style( 'hitchcock-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'hitchcock-block-editor-styles-font', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/assets/css/hitchcock-block-editor-styles.css' ), array( 'hitchcock-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
