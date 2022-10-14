@@ -2,7 +2,7 @@
 
 Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor support, a social icon menu, JetPack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styles, and much more.
 
-![Hitchcock](https://github.com/andersnoren/hitchcock/blob/main/screenshot.png)
+![Hitchcock](https://github.com/andersnoren/hitchcock/blob/master/screenshot.jpg)
 
 You can download the latest stable release of Hitchcock [from WordPress.org](https://wordpress.org/themes/hitchcock/).
 
