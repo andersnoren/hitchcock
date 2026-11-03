@@ -4,17 +4,17 @@
 
 	Theme Name: Hitchcock
     Text Domain: hitchcock
-    Version: 2.2.1
+    Version: 2.2.2
 	Author: Anders Norén
 	Author URI: https://andersnoren.se
     Theme URI: https://andersnoren.se/teman/hitchcock-wordpress-theme/
-	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor support, a social icon menu, JetPack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styles, and much more. Demo: https://andersnoren.se/themes/hitchcock/
+	Description: Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor support, a social icon menu, JetPack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styles, and much more. Demo: https://hitchcock.andersnoren.se
     Tags: blog, three-columns, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, photography, block-styles, wide-blocks
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
-	Theme URI: https://andersnoren.se/teman/hitchcock-wordpress-theme/
+	Requires at least: 4.5
 	Requires PHP: 5.4
-	Tested up to: 6.0
+	Tested up to: 7.1
 	
 	All files, unless otherwise stated, are released under the GNU General Public License
 	version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -1029,7 +1029,7 @@ input[type="button"],
 .social-menu a[href*="wordpress.org"]::before,
 .social-menu a[href*="wordpress.com"]::before { content: '\f411'; font-family: 'Font Awesome 5 Brands'; }
 .social-menu a[href*="youtube.com"]::before { content: '\f167'; font-family: 'Font Awesome 5 Brands'; }
-.social-menu a[href*="unsplash.com"]::before { content: '\f030'; font-family: 'Font Awesome 5'; }
+.social-menu a[href*="unsplash."]::before { content: '\f030'; font-family: 'Font Awesome 5'; }
 .social-menu a[href*="xing"]::before { content: '\f168'; font-family: 'Font Awesome 5 Brands'; }
 
 /* Header Background Image ------------------- */

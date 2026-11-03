@@ -2,11 +2,18 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 6.0
+Tested up to: 7.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+A minimal portfolio theme for designers, photographers and other creatives.
+
+
+== Description ==
+
+Hitchcock is a minimal portfolio theme for designers, photographers and other creatives. It features a beautiful responsive design, Block Editor support, a social icon menu, JetPack infinite scroll, custom accent color, custom header image, support for the gallery post format, the option to always show post preview titles, editor styles, and much more. Demo: https://hitchcock.andersnoren.se
 
 
 == Installation ==
@@ -37,6 +44,12 @@ To add social links to the sidebar on desktop and menu area on mobile/tablet, fo
 5. The images you uploaded should now be displayed in the post gallery.
 
 
+== Copyright ==
+
+Hitchcock WordPress Theme, Copyright 2015-2026 Anders Norén
+Hitchcock is distributed under the terms of the GNU GPL.
+
+
 == Licenses ==
 
 Droid Serif font 
@@ -65,14 +78,33 @@ Source: http://www.gnu.org/licenses/gpl-2.0.html
 
 Images used in screenshot.png
 License: Creative Commons Zero 
-Source: http://www.unsplash.com
+Source: Unsplash (added before the 2017 change to the Unsplash license, when its photos were released under CC0)
 
 Included background image (images/bg.jpg)
 License: Creative Commons Zero 
-Source: http://www.unsplash.com
+Source: Unsplash (added before the 2017 change to the Unsplash license, when its photos were released under CC0)
+
+
+== Frequently Asked Questions ==
+
+= Where can I get support? =
+Post your question in the Hitchcock support forum on WordPress.org: https://wordpress.org/support/theme/hitchcock/
+
+= Where can I request a feature or report a bug? =
+Open an issue in the Hitchcock GitHub repository: https://github.com/andersnoren/hitchcock
 
 
 == Changelog ==
+
+Version 2.2.2 (2026-11-03)
+-------------------------
+- Tested with WordPress 7.1.
+- Replaced deprecated jQuery methods (.resize(), .bind(), .unbind() and .delegate()) with .on() and .off().
+- Fixed the block editor styles not loading in the iframed editor.
+- Fixed Jetpack Infinite Scroll adding the contents of the page <head> to the posts container when loading more posts.
+- Updated the demo URL.
+- Added the Requires at least header to style.css and removed a duplicate Theme URI header.
+- Added Description, FAQ, Copyright and Upgrade Notice sections to the readme, and updated the image source notes.
 
 Version 2.2.1 (2022-07-01)
 -------------------------
@@ -286,3 +318,9 @@ Version 1.01 (2015-10-04)
 
 Version 1.0 (2015-08-15)
 ------------------------- 
+
+
+== Upgrade Notice ==
+
+= 2.2.2 =
+Tested with WordPress 7.1. Fixes the block editor styles in the iframed editor.

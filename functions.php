@@ -46,6 +46,7 @@ if ( ! function_exists( 'hitchcock_setup' ) ) :
 			'container'	=> 'posts',
 			'wrapper'	=> false,
 			'footer' 	=> false,
+			'render' 	=> 'hitchcock_infinite_scroll_render',
 		) );
 		
 		// Add nav menu
@@ -67,6 +68,42 @@ endif;
 
 // Handle Customizer settings
 require get_template_directory() . '/inc/classes/class-hitchcock-customize.php';
+
+
+/* ---------------------------------------------------------------------------------------------
+   JETPACK INFINITE SCROLL
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'hitchcock_infinite_scroll_render' ) ) :
+	function hitchcock_infinite_scroll_render() {
+
+		while ( have_posts() ) {
+			the_post();
+			get_template_part( 'content', get_post_format() );
+		}
+
+		// Jetpack calls wp_head() right after the render callback, inside the same output buffer, which adds
+		// the contents of <head> to the loaded posts. Buffer and discard that output. The wp_head actions still
+		// run, so Jetpack can still pick up any scripts and styles enqueued by the new posts.
+		add_action( 'wp_head', 'hitchcock_infinite_scroll_head_buffer_start', -99999 );
+		add_action( 'wp_head', 'hitchcock_infinite_scroll_head_buffer_end', PHP_INT_MAX );
+
+	}
+endif;
+
+if ( ! function_exists( 'hitchcock_infinite_scroll_head_buffer_start' ) ) :
+	function hitchcock_infinite_scroll_head_buffer_start() {
+		ob_start();
+	}
+endif;
+
+if ( ! function_exists( 'hitchcock_infinite_scroll_head_buffer_end' ) ) :
+	function hitchcock_infinite_scroll_head_buffer_end() {
+		ob_end_clean();
+		remove_action( 'wp_head', 'hitchcock_infinite_scroll_head_buffer_start', -99999 );
+		remove_action( 'wp_head', 'hitchcock_infinite_scroll_head_buffer_end', PHP_INT_MAX );
+	}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -623,11 +660,16 @@ endif;
 if ( ! function_exists( 'hitchcock_block_editor_styles' ) ) :
 	function hitchcock_block_editor_styles() {
 
+		// Only load in the editor. Hooked to enqueue_block_assets so the styles reach the iframed editor canvas.
+		if ( ! is_admin() ) {
+			return;
+		}
+
 		$theme_version = wp_get_theme( 'hitchcock' )->get( 'Version' );
 
 		wp_register_style( 'hitchcock-block-editor-styles-font', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		wp_enqueue_style( 'hitchcock-block-editor-styles', get_theme_file_uri( '/assets/css/hitchcock-block-editor-styles.css' ), array( 'hitchcock-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
-	add_action( 'enqueue_block_editor_assets', 'hitchcock_block_editor_styles', 1 );
+	add_action( 'enqueue_block_assets', 'hitchcock_block_editor_styles', 1 );
 endif;

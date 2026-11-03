@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 	
 	
 	// Hide mobile-navigation > 900
-	$(window).resize(function() {
+	$(window).on( 'resize', function() {
 		if ($(window).width() > 900) {
 			$(".nav-toggle").removeClass("active");
 			$(".mobile-navigation").hide();
@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 
 	resizeVideo(vidSelector);
 
-	$(window).resize(function() {
+	$(window).on( 'resize', function() {
 		resizeVideo(vidSelector);
 	});
 	

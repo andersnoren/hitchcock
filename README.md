@@ -25,4 +25,4 @@ Do you want to support the continued development of Hitchcock? You can send me a
 
 ## Resources
 - [About Hitchcock](https://andersnoren.se/teman/hitchcock-wordpress-theme/)
-- [Hitchcock demo site](https://andersnoren.se/themes/hitchcock/)
+- [Hitchcock demo site](https://hitchcock.andersnoren.se)
